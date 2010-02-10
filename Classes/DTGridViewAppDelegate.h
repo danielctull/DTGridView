@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DTGridViewAppDelegate : NSObject <UIApplicationDelegate> {
+@interface DTGridViewAppDelegate : NSObject <UIApplicationDelegate, UITableViewDataSource, UITableViewDelegate> {
     UIWindow *window;
+	UINavigationController *navigationController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
