@@ -26,6 +26,7 @@
 		2428E905112377B30019252F /* DTLicenseAgreementView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2428E901112377B30019252F /* DTLicenseAgreementView.xib */; };
 		2428E906112377B30019252F /* DTLicenseAgreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2428E903112377B30019252F /* DTLicenseAgreementViewController.m */; };
 		2428E907112377B30019252F /* license.html in Resources */ = {isa = PBXBuildFile; fileRef = 2428E904112377B30019252F /* license.html */; };
+		2428E919112379F10019252F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2428E918112379F10019252F /* Icon.png */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 /* End PBXBuildFile section */
@@ -63,6 +64,7 @@
 		2428E902112377B30019252F /* DTLicenseAgreementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLicenseAgreementViewController.h; sourceTree = "<group>"; };
 		2428E903112377B30019252F /* DTLicenseAgreementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLicenseAgreementViewController.m; sourceTree = "<group>"; };
 		2428E904112377B30019252F /* license.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = license.html; sourceTree = "<group>"; };
+		2428E918112379F10019252F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2428E918112379F10019252F /* Icon.png */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* DTGridView-Info.plist */,
 			);
@@ -247,6 +250,7 @@
 				2428E8D3112375660019252F /* DTSnapGridViewExampleView.xib in Resources */,
 				2428E905112377B30019252F /* DTLicenseAgreementView.xib in Resources */,
 				2428E907112377B30019252F /* license.html in Resources */,
+				2428E919112379F10019252F /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
