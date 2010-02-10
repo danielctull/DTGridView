@@ -53,10 +53,10 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-	if (section == 2)
-		return @"©2008-2010 Daniel Tull\nwww.danieltull.co.uk";
-	else 
-		return nil;
+	if (section == 0) return @"Please attribute me when using my source code by linking to my website. Thank you.";
+	if (section == 2) return @"©2008-2010 Daniel Tull\nwww.danieltull.co.uk";
+
+	return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
