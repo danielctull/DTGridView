@@ -14,29 +14,19 @@
 @synthesize gridView;
 
 - (void)viewDidLoad {
-	NSLog(@"%@:%s", self, _cmd);
     [super viewDidLoad];
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.view.autoresizesSubviews = YES;
-	DTGridView *gv = [[DTGridView alloc] initWithFrame:self.view.bounds];
-	self.gridView = gv;
-	[gv release];
+	gridView = [[DTGridView alloc] initWithFrame:self.view.bounds];
 	self.gridView.autoresizingMask = self.view.autoresizingMask;
 	[self.view addSubview:self.gridView];	
 }
 
-- (void)setView:(UIView *)aView {
-	NSLog(@"%@:%s", self, _cmd);
-	if (!aView)
-		if (self.gridView)
-			self.gridView = nil;
-	
-	[super setView:aView];
+- (void)viewDidUnload {
+	self.gridView = nil;
 }
 
 - (void)dealloc {
-	NSLog(@"%@:%s", self, _cmd);
-	// Crashes with self.gridView! Don't use accessors in dealloc or init.
 	[gridView release];
 	gridView = nil;
     [super dealloc];
@@ -55,6 +45,6 @@
 	return 0.0;
 }
 - (DTGridViewCell *)gridView:(DTGridView *)gridView viewForRow:(NSInteger)rowIndex column:(NSInteger)columnIndex {
- return nil;
+	return nil;
 }
 @end
