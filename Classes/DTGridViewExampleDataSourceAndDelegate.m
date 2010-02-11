@@ -101,14 +101,17 @@
 	[UIView commitAnimations];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Return YES for supported orientations
+    return YES;
+}
+
+#pragma mark -
+#pragma mark UIPickerViewDelegate methods
+
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
 	return 100.0;
 }
-
-//- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-//	[self.gridView scrollViewToRow:row column:component scrollPosition:DTGridViewScrollPositionNone animated:YES];
-//}
-
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
 	return 2;
@@ -122,13 +125,9 @@
 	return [NSString stringWithFormat:@"%i", row];
 }
 
-- (NSInteger)spacingBetweenRowsInGridView:(DTGridView *)gridView {
-	return 7;
-}
+#pragma mark -
+#pragma mark DTGridViewDataSource methods
 
-- (NSInteger)spacingBetweenColumnsInGridView:(DTGridView *)gridView {
-	return 4;
-}
 - (NSInteger)numberOfRowsInGridView:(DTGridView *)gridView {
 	return 25;
 }
@@ -140,225 +139,30 @@
 	return 100.0;
 }
 - (CGFloat)gridView:(DTGridView *)gridView widthForCellAtRow:(NSInteger)rowIndex column:(NSInteger)columnIndex {
-
 	return 100.0;
-	
-	if (rowIndex == 0) {
-		if (columnIndex == 0)
-			return 120.0;
-		else if (columnIndex == 1)
-			return 200.0;
-		else if (columnIndex == 2)
-			return 20.0;
-		else if (columnIndex == 3)
-			return 60.0;
-		else if (columnIndex == 4)
-			return 100.0;
-	} else if (rowIndex == 1){
-		if (columnIndex == 0)
-			return 30.0;
-		else if (columnIndex == 1)
-			return 170.0;
-		else if (columnIndex == 2)
-			return 200.0;
-		else if (columnIndex == 3)
-			return 40.0;
-		else if (columnIndex == 4)
-			return 60.0;
-	} else if (rowIndex == 2){
-		if (columnIndex == 0)
-			return 30.0;
-		else if (columnIndex == 1)
-			return 160.0;
-		else if (columnIndex == 2)
-			return 110.0;
-		else if (columnIndex == 3)
-			return 70.0;
-		else if (columnIndex == 4)
-			return 130.0;
-	} else if (rowIndex == 3) {
-		if (columnIndex == 0)
-			return 100.0;
-		else if (columnIndex == 1)
-			return 100.0;
-		else if (columnIndex == 2)
-			return 100.0;
-		else if (columnIndex == 3)
-			return 100.0;
-		else if (columnIndex == 4)
-			return 100.0;
-	} else if (rowIndex == 4){
-		if (columnIndex == 0)
-			return 100.0;
-		else if (columnIndex == 1)
-			return 100.0;
-		else if (columnIndex == 2)
-			return 100.0;
-		else if (columnIndex == 3)
-			return 100.0;
-		else if (columnIndex == 4)
-			return 100.0;
-	} else if (rowIndex == 5){
-		if (columnIndex == 0)
-			return 100.0;
-		else if (columnIndex == 1)
-			return 100.0;
-		else if (columnIndex == 2)
-			return 100.0;
-		else if (columnIndex == 3)
-			return 100.0;
-		else if (columnIndex == 4)
-			return 100.0;
-	} else if (rowIndex == 6){
-		if (columnIndex == 0)
-			return 100.0;
-		else if (columnIndex == 1)
-			return 100.0;
-		else if (columnIndex == 2)
-			return 100.0;
-		else if (columnIndex == 3)
-			return 100.0;
-		else if (columnIndex == 4)
-			return 100.0;
-	} else if (rowIndex == 7) {
-		if (columnIndex == 0)
-			return 100.0;
-		else if (columnIndex == 1)
-			return 100.0;
-		else if (columnIndex == 2)
-			return 100.0;
-		else if (columnIndex == 3)
-			return 100.0;
-		else if (columnIndex == 4)
-			return 100.0;
-	}
-	return 150.0;
 }
 
-//- (NSNumber *)gridView:(DTGridView *)gridView heightForRowAtIndex:(NSInteger)index;
 - (DTGridViewCell *)gridView:(DTGridView *)gv viewForRow:(NSInteger)rowIndex column:(NSInteger)columnIndex {
 	
-	//NSLog(@"gridView: viewForRow:%i column:%i", rowIndex, columnIndex);
-	
-	DTGridViewCell *view = [[gv dequeueReusableCellWithIdentifier:@"cell"] retain];
-	
-	//NSLog(@"%s ASKING", _cmd);
-	
-	if (!view) {
-		//NSLog(@"%s NEW CELL", _cmd);
-		view = [[DTGridViewCell alloc] initWithReuseIdentifier:@"cell"];
+	DTGridViewCell *cell = [gv dequeueReusableCellWithIdentifier:@"cell"];
+		
+	if (!cell) {
+		cell = [[[DTGridViewCell alloc] initWithReuseIdentifier:@"cell"] autorelease];
 	}
-	//view.frame = CGRectMake(0,0,150,150);
 	
-//	int r = random() % 10;
+	cell.backgroundColor = [colours objectAtIndex:(random() % 10)];
 	
-	view.backgroundColor = [colours objectAtIndex:(random() % 10)];
-	/*
-	if (rowIndex == 0) {
-		if (columnIndex == 0)
-			view.backgroundColor = [UIColor redColor];
-		else if (columnIndex == 1)
-			view.backgroundColor = [UIColor blueColor];
-		else if (columnIndex == 2)
-			view.backgroundColor = [UIColor purpleColor];
-		else if (columnIndex == 3)
-			view.backgroundColor = [UIColor orangeColor];	
-		else if (columnIndex == 4)
-			view.backgroundColor = [UIColor whiteColor];
-	} else if (rowIndex == 1){
-		if (columnIndex == 0)
-			view.backgroundColor = [UIColor lightGrayColor];
-		else if (columnIndex == 1)
-			view.backgroundColor = [UIColor grayColor];
-		else if (columnIndex == 2)
-			view.backgroundColor = [UIColor redColor];
-		else if (columnIndex == 3)
-			view.backgroundColor = [UIColor greenColor];	
-		else if (columnIndex == 4)
-			view.backgroundColor = [UIColor magentaColor];
-	} else if (rowIndex == 2){
-		if (columnIndex == 0)
-			view.backgroundColor = [UIColor redColor];
-		else if (columnIndex == 1)
-			view.backgroundColor = [UIColor blueColor];
-		else if (columnIndex == 2)
-			view.backgroundColor = [UIColor purpleColor];
-		else if (columnIndex == 3)
-			view.backgroundColor = [UIColor orangeColor];	
-		else if (columnIndex == 4)
-			view.backgroundColor = [UIColor whiteColor];
-	} else if (rowIndex == 3) {
-		if (columnIndex == 0)
-			view.backgroundColor = [UIColor lightGrayColor];
-		else if (columnIndex == 1)
-			view.backgroundColor = [UIColor grayColor];
-		else if (columnIndex == 2)
-			view.backgroundColor = [UIColor yellowColor];
-		else if (columnIndex == 3)
-			view.backgroundColor = [UIColor greenColor];	
-		else if (columnIndex == 4)
-			view.backgroundColor = [UIColor magentaColor];
-	} else if (rowIndex == 4){
-			if (columnIndex == 0)
-				view.backgroundColor = [UIColor redColor];
-			else if (columnIndex == 1)
-				view.backgroundColor = [UIColor blueColor];
-			else if (columnIndex == 2)
-				view.backgroundColor = [UIColor purpleColor];
-			else if (columnIndex == 3)
-				view.backgroundColor = [UIColor orangeColor];	
-			else if (columnIndex == 4)
-				view.backgroundColor = [UIColor whiteColor];
-		} else if (rowIndex == 5){
-			if (columnIndex == 0)
-				view.backgroundColor = [UIColor lightGrayColor];
-			else if (columnIndex == 1)
-				view.backgroundColor = [UIColor grayColor];
-			else if (columnIndex == 2)
-				view.backgroundColor = [UIColor yellowColor];
-			else if (columnIndex == 3)
-				view.backgroundColor = [UIColor greenColor];	
-			else if (columnIndex == 4)
-				view.backgroundColor = [UIColor magentaColor];
-		} else if (rowIndex == 6){
-			if (columnIndex == 0)
-				view.backgroundColor = [UIColor redColor];
-			else if (columnIndex == 1)
-				view.backgroundColor = [UIColor blueColor];
-			else if (columnIndex == 2)
-				view.backgroundColor = [UIColor purpleColor];
-			else if (columnIndex == 3)
-				view.backgroundColor = [UIColor orangeColor];	
-			else if (columnIndex == 4)
-				view.backgroundColor = [UIColor whiteColor];
-		} else if (rowIndex == 7) {
-			if (columnIndex == 0)
-				view.backgroundColor = [UIColor lightGrayColor];
-			else if (columnIndex == 1)
-				view.backgroundColor = [UIColor grayColor];
-			else if (columnIndex == 2)
-				view.backgroundColor = [UIColor yellowColor];
-			else if (columnIndex == 3)
-				view.backgroundColor = [UIColor greenColor];	
-			else if (columnIndex == 4)
-				view.backgroundColor = [UIColor magentaColor];
-		}
-	*/
-	return [view autorelease];
+	return cell;
 }
 
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return YES;
-}
+#pragma mark -
+#pragma mark DTGridViewDelegate methods
 
 - (void)gridView:(DTGridView *)gridView selectionMadeAtRow:(NSInteger)rowIndex column:(NSInteger)columnIndex {
 	NSLog(@"%@:%s", self, _cmd);
 }
 
 - (void)gridView:(DTGridView *)gridView scrolledToEdge:(DTGridViewEdge)edge {
-	//NSLog(@"%@:%s", self, _cmd);
 }
 
 @end
