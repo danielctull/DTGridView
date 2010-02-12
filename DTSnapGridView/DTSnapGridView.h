@@ -15,7 +15,7 @@
 @interface DTSnapGridView : DTGridView {
 	DTSnapGridViewCell *selectedCell;	
 }
-@property (nonatomic, assign) IBOutlet NSObject<DTSnapGridViewDelegate> *gridDelegate;
+@property (nonatomic, assign) IBOutlet id<DTSnapGridViewDelegate> delegate;
 
 @end
 

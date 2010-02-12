@@ -21,7 +21,7 @@
 	gridView.dataSource = self;
 	gridView.infiniteVerticalScrolling = NO;
 	gridView.infiniteHorizontalScrolling = YES;
-	gridView.gridDelegate = self;
+	gridView.delegate = self;
 	gridView.pagingEnabled = NO;
 	[self.view addSubview:gridView];
 }

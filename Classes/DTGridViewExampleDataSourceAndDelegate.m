@@ -41,7 +41,7 @@
     [super viewDidLoad];
 	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Scroll" style:UIBarButtonItemStyleBordered target:self action:@selector(scroll)] autorelease];	
 	self.title = @"DTGridView";
-	self.gridView.gridDelegate = self;
+	self.gridView.delegate = self;
 	self.gridView.dataSource = self;
 	self.gridView.bounces = YES;
 }

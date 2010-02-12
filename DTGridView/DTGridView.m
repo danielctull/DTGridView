@@ -36,7 +36,8 @@
 
 @implementation DTGridView
 
-@synthesize dataSource, gridCells, numberOfRows, cellOffset, gridDelegate, outset;
+@dynamic delegate;
+@synthesize dataSource, gridCells, numberOfRows, cellOffset, outset;
 
 NSInteger intSort(id info1, id info2, void *context) {
 	
@@ -55,10 +56,6 @@ NSInteger intSort(id info1, id info2, void *context) {
 		return NSOrderedSame;
 }
 
-- (id)delegate {
-	return self;
-}
-
 - (void)reloadData {
 	[self loadData];
 	[self setNeedsDisplay];
@@ -73,8 +70,6 @@ NSInteger intSort(id info1, id info2, void *context) {
 	rowPositions = [[NSMutableArray alloc] init];
 	rowHeights = [[NSMutableArray alloc] init];
 	cellsOnScreen = [[NSMutableArray alloc] init];
-	
-	super.delegate = self;
 	
 	freeCells = [[NSMutableArray alloc] init];
 		
@@ -95,13 +90,14 @@ NSInteger intSort(id info1, id info2, void *context) {
 }
 
 - (void)didLoad {
-	if ([self.gridDelegate respondsToSelector:@selector(gridViewDidLoad:)])
-		[self.gridDelegate gridViewDidLoad:self];
+	if ([self.delegate respondsToSelector:@selector(gridViewDidLoad:)])
+		[self.delegate gridViewDidLoad:self];
 }
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	[self checkViews];
+	[self fireEdgeScroll];
 }
 
 - (void)dealloc {
@@ -589,8 +585,8 @@ NSInteger intSort(id info1, id info2, void *context) {
 	if (!animated)
 		[self checkViews];
 	
-	if ([self.gridDelegate respondsToSelector:@selector(gridView:didProgrammaticallyScrollToRow:column:)])
-		[self.gridDelegate gridView:self didProgrammaticallyScrollToRow:rowIndex column:columnIndex];
+	if ([self.delegate respondsToSelector:@selector(gridView:didProgrammaticallyScrollToRow:column:)])
+		[self.delegate gridView:self didProgrammaticallyScrollToRow:rowIndex column:columnIndex];
 		
 	
 }
@@ -612,111 +608,27 @@ NSInteger intSort(id info1, id info2, void *context) {
 	[self scrollViewToRow:rowIndex column:columnIndex scrollPosition:position animated:animated];
 }
 
-#pragma mark UIScrollViewDelegate methods
-
-//All scrollview delegate methods are implemented to pass them through to the gridview's delegate.
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-	if ([self.gridDelegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)])
-		[self.gridDelegate scrollViewDidEndDecelerating:scrollView];
-	
-	[self positionCheck];
-	[self fireEdgeScroll];
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-	if ([self.gridDelegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)])
-		[self.gridDelegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
-	
-	if (!decelerate)
-		[self positionCheck];
-	
-	[self fireEdgeScroll];
-}
-
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-	if ([self.gridDelegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)])
-		[self.gridDelegate scrollViewDidEndScrollingAnimation:scrollView];
-	
-	//[self positionCheck];
-	
-	//[self fireEdgeScroll];
-}
-
-- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
-	if ([self.gridDelegate respondsToSelector:@selector(scrollViewDidEndZooming:withView:atScale:)])
-		[self.gridDelegate scrollViewDidEndZooming:scrollView withView:view atScale:scale];
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-	
-	//[self checkViews];
-	
-	// TODO: Optimize the edge scrolling check
-	
-	[self positionCheck];
-	
-	[self fireEdgeScroll];
-	
-	if ([self.gridDelegate respondsToSelector:@selector(scrollViewDidScroll:)])
-		[self.gridDelegate scrollViewDidScroll:scrollView];
-	
-}
-
-- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
-	if ([self.gridDelegate respondsToSelector:@selector(scrollViewDidScrollToTop:)])
-		[self.gridDelegate scrollViewDidScrollToTop:scrollView];
-}
-
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-	if ([self.gridDelegate respondsToSelector:@selector(scrollViewWillBeginDecelerating:)])
-		[self.gridDelegate scrollViewWillBeginDecelerating:scrollView];
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-	if ([self.gridDelegate respondsToSelector:@selector(scrollViewWillBeginDragging:)])
-		[self.gridDelegate scrollViewWillBeginDragging:scrollView];
-	
-	//if ([self respondsToSelector:@selector(positionCheck)])
-	//[self positionCheck];
-	//[self fireEdgeScroll];
-}
-
-- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
-	if ([self.gridDelegate respondsToSelector:@selector(scrollViewShouldScrollToTop:)])
-		return [self.gridDelegate scrollViewShouldScrollToTop:scrollView];
-	
-	return YES;
-}
-
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-	if ([self.gridDelegate respondsToSelector:@selector(viewForZoomingInScrollView:)])
-		return [self.gridDelegate viewForZoomingInScrollView:scrollView];
-	
-	return nil;
-}
-
 - (void)positionCheck {}
 
 - (void)fireEdgeScroll {
 	
 	if (self.pagingEnabled)
-		if ([self.gridDelegate respondsToSelector:@selector(pagedGridView:didScrollToRow:column:)])
-			[self.gridDelegate pagedGridView:self didScrollToRow:((NSInteger)(self.contentOffset.y / self.frame.size.height)) column:((NSInteger)(self.contentOffset.x / self.frame.size.width))];
+		if ([self.delegate respondsToSelector:@selector(pagedGridView:didScrollToRow:column:)])
+			[self.delegate pagedGridView:self didScrollToRow:((NSInteger)(self.contentOffset.y / self.frame.size.height)) column:((NSInteger)(self.contentOffset.x / self.frame.size.width))];
 	
-	if ([self.gridDelegate respondsToSelector:@selector(gridView:scrolledToEdge:)]) {
+	if ([self.delegate respondsToSelector:@selector(gridView:scrolledToEdge:)]) {
 		
 		if (self.contentOffset.x <= 0)
-			[self.gridDelegate gridView:self scrolledToEdge:DTGridViewEdgeLeft];
+			[self.delegate gridView:self scrolledToEdge:DTGridViewEdgeLeft];
 		
 		if (self.contentOffset.x >= self.contentSize.width - self.frame.size.width)
-			[self.gridDelegate gridView:self scrolledToEdge:DTGridViewEdgeRight];
+			[self.delegate gridView:self scrolledToEdge:DTGridViewEdgeRight];
 		
 		if (self.contentOffset.y <= 0)
-			[self.gridDelegate gridView:self scrolledToEdge:DTGridViewEdgeTop];
+			[self.delegate gridView:self scrolledToEdge:DTGridViewEdgeTop];
 		
 		if (self.contentOffset.y >= self.contentSize.height - self.frame.size.height)
-			[self.gridDelegate gridView:self scrolledToEdge:DTGridViewEdgeBottom];
+			[self.delegate gridView:self scrolledToEdge:DTGridViewEdgeBottom];
 	}
 }
 
@@ -724,8 +636,8 @@ NSInteger intSort(id info1, id info2, void *context) {
 	
 	[self bringSubviewToFront:cell];
 	
-	if ([self.gridDelegate respondsToSelector:@selector(gridView:selectionMadeAtRow:column:)])
-		[self.gridDelegate gridView:self selectionMadeAtRow:cell.yPosition column:cell.xPosition];
+	if ([self.delegate respondsToSelector:@selector(gridView:selectionMadeAtRow:column:)])
+		[self.delegate gridView:self selectionMadeAtRow:cell.yPosition column:cell.xPosition];
 }
 
 @end

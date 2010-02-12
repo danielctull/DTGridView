@@ -72,7 +72,6 @@ struct DTOutset {
 */
 @interface DTGridView : UIScrollView <UIScrollViewDelegate, DTGridViewCellDelegate> {
 	
- 	NSObject<DTGridViewDelegate> *gridDelegate;
 	NSObject<DTGridViewDataSource> *dataSource;
 	
 	CGPoint cellOffset;
@@ -110,7 +109,7 @@ struct DTOutset {
  @abstract The object that acts as the delegate of the receiving grid view.
  @discussion The delegate must adopt the DTGridViewDelegate protocol. The delegate is not retained.
 */
-@property (nonatomic, assign) IBOutlet NSObject<DTGridViewDelegate> *gridDelegate;
+@property (nonatomic, assign) IBOutlet id<DTGridViewDelegate> delegate;
 
 /*!
  @abstract The offset for each cell with respect to the cells above and to the right.
