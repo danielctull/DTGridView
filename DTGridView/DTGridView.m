@@ -81,6 +81,22 @@ NSInteger intSort(id info1, id info2, void *context) {
 	
 }
 
+- (void)setFrame:(CGRect)aFrame {
+	
+	CGSize oldSize = self.frame.size;
+	CGSize newSize = aFrame.size;
+	
+	if (oldSize.height != newSize.height || oldSize.width != newSize.width) {
+		hasResized = YES;
+	}
+	
+	[super setFrame:aFrame];
+	
+	if (hasResized)  {
+		[self setNeedsLayout];
+	}
+}
+
 - (void)reloadData {
 	[self loadData];
 	[self setNeedsLayout];
@@ -330,12 +346,17 @@ NSInteger intSort(id info1, id info2, void *context) {
 		isGoingUp = YES;
 	else if (self.contentOffset.y > oldContentOffset.y && self.contentOffset.y + self.frame.size.height < self.contentSize.height)
 		isGoingDown = YES;
+	else if (hasResized)
+		isGoingUp = YES;
 	
 	if (self.contentOffset.x < oldContentOffset.x && self.contentOffset.x >= 0)
 		isGoingLeft = YES;
 	else if (self.contentOffset.x > oldContentOffset.x && self.contentOffset.x + self.frame.size.width < self.contentSize.width)
 		isGoingRight = YES;
+	else if (hasResized)
+		isGoingRight = YES;
 	
+	hasResized = NO;
 	oldContentOffset = self.contentOffset;
 	
 	for (DTGridViewCellInfo *info in orderedCells) {

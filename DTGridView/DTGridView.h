@@ -90,6 +90,7 @@ struct DTOutset {
 	NSMutableArray *cellsOnScreen;
 	
 	CGPoint oldContentOffset;
+	BOOL hasResized;
 	
 	BOOL hasLoadedData;
 		
