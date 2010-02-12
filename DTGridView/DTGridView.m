@@ -39,6 +39,13 @@
 @dynamic delegate;
 @synthesize dataSource, gridCells, numberOfRows, cellOffset, outset;
 
+- (void)setGridDelegate:(id <DTGridViewDelegate>)aDelegate {
+	self.delegate = aDelegate;
+}
+- (id <DTGridViewDelegate>)gridDelegate {
+	return self.delegate;
+}
+
 NSInteger intSort(id info1, id info2, void *context) {
 	
 	DTGridViewCellInfo *i1 = (DTGridViewCellInfo *)info1;

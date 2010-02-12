@@ -110,6 +110,11 @@ struct DTOutset {
  @discussion The delegate must adopt the DTGridViewDelegate protocol. The delegate is not retained.
 */
 @property (nonatomic, assign) IBOutlet id<DTGridViewDelegate> delegate;
+/*!
+ @abstract The object that acts as the delegate of the receiving grid view.
+ @deprecated This property is depricated and you should now use the standard delegate property.
+ */
+@property (nonatomic, assign) IBOutlet id<DTGridViewDelegate> gridDelegate;
 
 /*!
  @abstract The offset for each cell with respect to the cells above and to the right.
