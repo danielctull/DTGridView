@@ -63,9 +63,27 @@ NSInteger intSort(id info1, id info2, void *context) {
 		return NSOrderedSame;
 }
 
+
+- (id)initWithFrame:(CGRect)frame {
+	
+	if (!(self = [super initWithFrame:frame])) return nil;
+	
+	gridRows = [[NSMutableArray alloc] init];
+	rowPositions = [[NSMutableArray alloc] init];
+	rowHeights = [[NSMutableArray alloc] init];
+	cellsOnScreen = [[NSMutableArray alloc] init];
+	
+	freeCells = [[NSMutableArray alloc] init];
+	
+	cellInfoForCellsOnScreen = [[NSMutableArray alloc] init];
+	
+	return self;
+	
+}
+
 - (void)reloadData {
 	[self loadData];
-	[self setNeedsDisplay];
+	[self setNeedsLayout];
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -73,14 +91,6 @@ NSInteger intSort(id info1, id info2, void *context) {
 	rowIndexOfSelectedCell = -1;
 	
 	oldContentOffset = 	CGPointMake(0.0, 0.0);
-	gridRows = [[NSMutableArray alloc] init];
-	rowPositions = [[NSMutableArray alloc] init];
-	rowHeights = [[NSMutableArray alloc] init];
-	cellsOnScreen = [[NSMutableArray alloc] init];
-	
-	freeCells = [[NSMutableArray alloc] init];
-		
-	cellInfoForCellsOnScreen = [[NSMutableArray alloc] init];
 		
 	//hasLoadedData = NO;
 	
