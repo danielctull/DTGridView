@@ -98,6 +98,9 @@ struct DTOutset {
 	
 	NSInteger rowIndexOfSelectedCell;
 	NSInteger columnIndexOfSelectedCell;
+	
+	NSTimer *decelerationTimer;
+	NSTimer *draggingTimer;
 }
 
 /*!
@@ -125,6 +128,12 @@ struct DTOutset {
 @property (assign) UIEdgeInsets outset;
 @property (nonatomic, retain) NSMutableArray *gridCells;
 @property (nonatomic) NSInteger numberOfRows;
+
+
+
+- (void)didEndMoving;
+- (void)didEndDragging;
+- (void)didEndDecelerating;
 
 - (CGFloat)findWidthForRow:(NSInteger)row column:(NSInteger)column;
 - (NSInteger)findNumberOfRows;

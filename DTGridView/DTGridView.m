@@ -32,12 +32,19 @@
 - (void)checkNewRowStartingWithCellInfo:(NSObject<DTGridViewCellInfoProtocol> *)info goingUp:(BOOL)goingUp;
 - (NSObject<DTGridViewCellInfoProtocol> *)cellInfoForRow:(NSInteger)row column:(NSInteger)col;
 - (void)checkRow:(NSInteger)row column:(NSInteger)col goingLeft:(BOOL)goingLeft;
+
+
+- (void)decelerationTimer:(NSTimer *)timer;
+- (void)draggingTimer:(NSTimer *)timer;
+
+@property (nonatomic, retain) NSTimer *decelerationTimer, *draggingTimer;
 @end
 
 @implementation DTGridView
 
 @dynamic delegate;
 @synthesize dataSource, gridCells, numberOfRows, cellOffset, outset;
+@synthesize decelerationTimer, draggingTimer;
 
 - (void)setGridDelegate:(id <DTGridViewDelegate>)aDelegate {
 	self.delegate = aDelegate;
@@ -127,10 +134,35 @@ NSInteger intSort(id info1, id info2, void *context) {
 		[self.delegate gridViewDidLoad:self];
 }
 
+- (void)didEndDragging {}
+- (void)didEndDecelerating {}
+- (void)didEndMoving {}
+
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	[self checkViews];
 	[self fireEdgeScroll];
+	
+	if (!self.draggingTimer && !self.decelerationTimer && self.dragging)
+		self.draggingTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(draggingTimer:) userInfo:nil repeats:NO];		
+	
+	if (!self.decelerationTimer && self.decelerating) {
+		self.decelerationTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(decelerationTimer:) userInfo:nil repeats:NO];
+		[self.draggingTimer invalidate];
+		self.draggingTimer = nil;
+	}
+}
+
+- (void)decelerationTimer:(NSTimer *)timer {
+	self.decelerationTimer = nil;
+	[self didEndDecelerating];
+	[self didEndMoving];
+}
+
+- (void)draggingTimer:(NSTimer *)timer {
+	self.draggingTimer = nil;
+	[self didEndDragging];
+	[self didEndMoving];
 }
 
 - (void)dealloc {

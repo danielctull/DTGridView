@@ -9,20 +9,11 @@
 #import "DTSnapGridView.h"
 
 @interface DTSnapGridView ()
-
-- (void)decelerationTimer:(NSTimer *)timer;
-- (void)draggingTimer:(NSTimer *)timer;
-
-@property (nonatomic, assign) IBOutlet id<DTSnapGridViewDelegate> delegate;
-@property (nonatomic, retain) NSTimer *decelerationTimer, *draggingTimer;
-
 @end
 
 @implementation DTSnapGridView
 
 @dynamic delegate;
-@synthesize decelerationTimer, draggingTimer;
-
 - (void)dealloc {
 	[decelerationTimer release];
 	decelerationTimer = nil;
@@ -45,38 +36,10 @@
 			}
 		}
 	}
-	
-	
-	if (!self.draggingTimer && !self.decelerationTimer && self.dragging)
-		self.draggingTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(draggingTimer:) userInfo:nil repeats:NO];		
-	
-	if (!self.decelerationTimer && self.decelerating) {
-		self.decelerationTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(decelerationTimer:) userInfo:nil repeats:NO];
-		[self.draggingTimer invalidate];
-		self.draggingTimer = nil;
-	}
-}
-
-- (void)decelerationTimer:(NSTimer *)timer {
-	self.decelerationTimer = nil;
-	[self didEndDecelerating];
-}
-
-- (void)draggingTimer:(NSTimer *)timer {
-	if (self.dragging) {
-		self.draggingTimer = [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(draggingTimer:) userInfo:nil repeats:NO];
-	} else {
-		self.draggingTimer = nil;
-		[self didEndDragging];
-	}
 }
 
 
-- (void)didEndDragging {
-	[self scrollViewToRow:0 column:selectedCell.xPosition scrollPosition:DTGridViewScrollPositionMiddleCenter animated:YES];
-}
-
-- (void)didEndDecelerating {
+- (void)didEndMoving {
 	[self scrollViewToRow:0 column:selectedCell.xPosition scrollPosition:DTGridViewScrollPositionMiddleCenter animated:YES];
 }
 

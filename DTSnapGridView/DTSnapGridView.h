@@ -14,13 +14,8 @@
 
 @interface DTSnapGridView : DTGridView {
 	DTSnapGridViewCell *selectedCell;
-	NSTimer *decelerationTimer;
-	NSTimer *draggingTimer;
 }
-
-- (void)didEndDragging;
-- (void)didEndDecelerating;
-
+@property (nonatomic, assign) IBOutlet id<DTSnapGridViewDelegate> delegate;
 @end
 
 @protocol DTSnapGridViewDelegate <DTGridViewDelegate>
