@@ -7,6 +7,14 @@
 //
 
 #import "DTGridViewCell.h"
+#import "DTGridView.h"
+
+#pragma mark Private Methods
+@interface DTGridViewCell ()
+- (DTGridView *)gridView;
+@end
+
+
 
 @implementation DTGridViewCell
 
@@ -50,8 +58,18 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	self.highlighted = NO;
+	[[self gridView] selectRow:self.yPosition column:self.xPosition scrollPosition:DTGridViewScrollPositionNone animated:YES];
 	[self.delegate gridViewCellWasTouched:self];
 	[super touchesEnded:touches withEvent:event];
+}
+
+#pragma mark -
+#pragma mark Private Methods
+
+- (DTGridView *)gridView {	
+	UIResponder *r = [self nextResponder];
+	if (![r isKindOfClass:[DTGridView class]]) return nil;
+	return (DTGridView *)r;
 }
 
 @end
