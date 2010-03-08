@@ -11,6 +11,7 @@
 @implementation DTGridViewCell
 
 @synthesize xPosition, yPosition, identifier, delegate, selected;
+@synthesize highlighted;
 
 @dynamic frame;
 
@@ -24,6 +25,11 @@
 	return self;
 }
 
+- (void)dealloc {
+	[identifier release];
+    [super dealloc];
+}
+
 - (void)awakeFromNib {
 	identifier = nil;
 }
@@ -32,14 +38,20 @@
 	self.selected = NO;
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	[self.delegate gridViewCellWasTouched:self];
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	self.highlighted = YES;
 	[super touchesEnded:touches withEvent:event];
 }
 
-- (void)dealloc {
-	[identifier release];
-    [super dealloc];
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+	self.highlighted = NO;
+	[super touchesCancelled:touches withEvent:event];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	self.highlighted = NO;
+	[self.delegate gridViewCellWasTouched:self];
+	[super touchesEnded:touches withEvent:event];
 }
 
 @end

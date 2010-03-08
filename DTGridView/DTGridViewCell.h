@@ -22,6 +22,7 @@
 	NSString *identifier;
 	
 	BOOL selected;
+	BOOL highlighted;
 	
 	id<DTGridViewCellDelegate> delegate;
 	
@@ -29,6 +30,7 @@
 @property (assign) id delegate;
 @property (copy) NSString *identifier;
 @property (assign) BOOL selected;
+@property (assign) BOOL highlighted;
 - (id)initWithReuseIdentifier:(NSString *)identifier;
 - (void)prepareForReuse;
 @end
