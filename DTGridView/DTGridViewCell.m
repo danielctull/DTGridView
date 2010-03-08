@@ -44,6 +44,7 @@
 
 - (void)prepareForReuse {
 	self.selected = NO;
+	self.highlighted = NO;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
