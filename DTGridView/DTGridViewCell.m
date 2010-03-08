@@ -32,9 +32,9 @@
 	self.selected = NO;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self.delegate gridViewCellWasTouched:self];
-	[self.nextResponder touchesBegan:touches withEvent:event];
+	[super touchesEnded:touches withEvent:event];
 }
 
 - (void)dealloc {
