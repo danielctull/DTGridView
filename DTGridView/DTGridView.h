@@ -155,6 +155,14 @@ struct DTOutset {
 - (DTGridViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
 
 /*!
+ @abstract Returns a grid view cell object located by its row and column positions.
+ @param rowIndex The index of the row of the wanted cell.
+ @param columnIndex The index of the column of the wanted cell.
+ @return The grid view cell of the grid or nil if the cell is not visible or the indexes is out of range.
+ */
+- (DTGridViewCell *)cellForRow:(NSInteger)rowIndex column:(NSInteger)columnIndex;
+
+/*!
  @abstract A constant that identifies a relative position in the receiving table view (top, middle, bottom) for row when scrolling concludes. See “Table View Scroll Position” a descriptions of valid constants.
  @param rowIndex The index of the row to scroll to.
  @param columnIndex The index of the column to scroll to.

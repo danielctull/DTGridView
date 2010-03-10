@@ -559,6 +559,19 @@ NSInteger intSort(id info1, id info2, void *context) {
 	return nil;
 }
 
+- (DTGridViewCell *)cellForRow:(NSInteger)rowIndex column:(NSInteger)columnIndex {
+	
+	for (UIView *v in self.subviews) {
+		if ([v isKindOfClass:[DTGridViewCell class]]) {
+			DTGridViewCell *c = (DTGridViewCell *)v;
+			if (c.xPosition == columnIndex && c.yPosition == rowIndex)
+				return c;
+		}
+	}
+	
+	return nil;
+}
+
 - (void)scrollViewToRow:(NSInteger)rowIndex column:(NSInteger)columnIndex scrollPosition:(DTGridViewScrollPosition)position animated:(BOOL)animated {
 	
 	CGFloat xPos, yPos;
