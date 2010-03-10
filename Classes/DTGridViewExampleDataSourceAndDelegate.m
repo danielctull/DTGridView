@@ -158,8 +158,9 @@
 #pragma mark -
 #pragma mark DTGridViewDelegate methods
 
-- (void)gridView:(DTGridView *)gridView selectionMadeAtRow:(NSInteger)rowIndex column:(NSInteger)columnIndex {
-	NSLog(@"%@:%s", self, _cmd);
+- (void)gridView:(DTGridView *)gv selectionMadeAtRow:(NSInteger)rowIndex column:(NSInteger)columnIndex {
+	NSLog(@"%@:%s %@", self, _cmd, [gv cellForRow:rowIndex column:columnIndex]);
+	
 }
 
 - (void)gridView:(DTGridView *)gridView scrolledToEdge:(DTGridViewEdge)edge {
