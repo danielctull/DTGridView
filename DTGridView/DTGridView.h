@@ -129,7 +129,11 @@ struct DTOutset {
 @property (nonatomic, retain) NSMutableArray *gridCells;
 @property (nonatomic) NSInteger numberOfRows;
 
+#pragma mark -
+#pragma mark Subclass methods
 
+// These methods can be overridden by subclasses. 
+// They should never need to be called from outside classes.
 
 - (void)didEndMoving;
 - (void)didEndDragging;
@@ -141,6 +145,8 @@ struct DTOutset {
 - (CGFloat)findHeightForRow:(NSInteger)row;
 - (DTGridViewCell *)findViewForRow:(NSInteger)row column:(NSInteger)column;
 
+#pragma mark -
+#pragma mark Regular methods
 /*!
  @abstract Returns a reusable grid view cell object located by its identifier.
  @param identifier A string identifying the cell object to be reused.
@@ -172,7 +178,7 @@ struct DTOutset {
 - (void)positionCheck;
 
 @end
-
+#pragma mark -
 @protocol DTGridViewDelegate <UIScrollViewDelegate>
 
 @optional
@@ -186,7 +192,7 @@ struct DTOutset {
 - (void)gridView:(DTGridView *)gridView didProgrammaticallyScrollToRow:(NSInteger)rowIndex column:(NSInteger)columnIndex;
 @end
 
-
+#pragma mark -
 @protocol DTGridViewDataSource
 /*!
  Asks the data source to return the number of rows in the grid view.
