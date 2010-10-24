@@ -201,12 +201,13 @@ NSInteger intSort(id info1, id info2, void *context) {
 	
 	[self insertSubview:cell atIndex:0];
 	
-	// remove any existing view at this frame
+	// remove any existing view at this frame	
 	for (UIView *v in self.subviews) {
-		if (v.frame.origin.x == cell.frame.origin.x &&
+		if ([v isKindOfClass:[DTGridViewCell class]] &&
+			v.frame.origin.x == cell.frame.origin.x &&
 			v.frame.origin.y == cell.frame.origin.y &&
-			v != cell)
-		{
+			v != cell) {
+			
 			[v removeFromSuperview];
 			break;
 		}
