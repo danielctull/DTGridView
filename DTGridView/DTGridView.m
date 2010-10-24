@@ -200,6 +200,19 @@ NSInteger intSort(id info1, id info2, void *context) {
 	[[gridCells objectAtIndex:info.yPosition] replaceObjectAtIndex:info.xPosition withObject:cell];
 	
 	[self insertSubview:cell atIndex:0];
+	
+	// remove any existing view at this frame	
+	for (UIView *v in self.subviews) {
+		if ([v isKindOfClass:[DTGridViewCell class]] &&
+			v.frame.origin.x == cell.frame.origin.x &&
+			v.frame.origin.y == cell.frame.origin.y &&
+			v != cell) {
+			
+			[v removeFromSuperview];
+			break;
+		}
+	}
+	
 	[cell release];
 
 }
@@ -286,8 +299,8 @@ NSInteger intSort(id info1, id info2, void *context) {
 	
 	NSMutableArray *cellInfoArrayRows = [[NSMutableArray alloc] init];
 	
-	CGFloat maxHeight;
-	CGFloat maxWidth;
+	CGFloat maxHeight = 0;
+	CGFloat maxWidth = 0;
 	
 	
 	for (NSInteger i = 0; i < self.numberOfRows; i++) {
@@ -356,6 +369,18 @@ NSInteger intSort(id info1, id info2, void *context) {
 	self.gridCells = cellInfoArrayRows;
 	[cellInfoArrayRows release];
 	
+	if ([self.subviews count] > [self.gridCells count]) {
+		// the underlying data must have reduced, time to iterate
+		NSSet *gridCellsSet = [NSSet setWithArray:self.gridCells];
+		NSArray *subviewsCopy = [self.subviews copy];
+		
+		for (DTGridViewCell *cell in subviewsCopy) {
+			if (![gridCellsSet member:cell])
+				[cell removeFromSuperview];
+		}
+		
+		[subviewsCopy release];
+	}
 }
 
 - (void)checkViews {
@@ -574,7 +599,7 @@ NSInteger intSort(id info1, id info2, void *context) {
 
 - (void)scrollViewToRow:(NSInteger)rowIndex column:(NSInteger)columnIndex scrollPosition:(DTGridViewScrollPosition)position animated:(BOOL)animated {
 	
-	CGFloat xPos, yPos;
+	CGFloat xPos = 0, yPos = 0;
 	
 	CGRect cellFrame = [[[self.gridCells objectAtIndex:rowIndex] objectAtIndex:columnIndex] frame];		
 	
