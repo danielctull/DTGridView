@@ -27,10 +27,10 @@
 	id<DTGridViewCellDelegate> delegate;
 	
 }
-@property (assign) id delegate;
-@property (copy) NSString *identifier;
-@property (assign) BOOL selected;
-@property (assign) BOOL highlighted;
+@property (nonatomic, assign) id delegate;
+@property (nonatomic, copy) NSString *identifier;
+@property (nonatomic, assign) BOOL selected;
+@property (nonatomic, assign) BOOL highlighted;
 - (id)initWithReuseIdentifier:(NSString *)identifier;
 - (void)prepareForReuse;
 @end
