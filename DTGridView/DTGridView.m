@@ -25,6 +25,7 @@
 @end
 
 @interface DTGridView ()
+- (void)dctInternal_setupInternals;
 - (void)loadData;
 - (void)checkViews;
 - (void)initialiseViews;
@@ -74,7 +75,18 @@ NSInteger intSort(id info1, id info2, void *context) {
 - (id)initWithFrame:(CGRect)frame {
 	
 	if (!(self = [super initWithFrame:frame])) return nil;
+
+	[self dctInternal_setupInternals];
 	
+	return self;
+	
+}
+
+- (void)awakeFromNib {
+	[self dctInternal_setupInternals];
+}
+
+- (void)dctInternal_setupInternals {
 	gridRows = [[NSMutableArray alloc] init];
 	rowPositions = [[NSMutableArray alloc] init];
 	rowHeights = [[NSMutableArray alloc] init];
@@ -83,9 +95,6 @@ NSInteger intSort(id info1, id info2, void *context) {
 	freeCells = [[NSMutableArray alloc] init];
 	
 	cellInfoForCellsOnScreen = [[NSMutableArray alloc] init];
-	
-	return self;
-	
 }
 
 - (void)setFrame:(CGRect)aFrame {
