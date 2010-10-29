@@ -9,6 +9,9 @@
 #import "DTGridView.h"
 #import "DTGridViewCellInfoProtocol.h"
 
+NSInteger const DTGridViewInvalid = -1;
+
+
 @interface DTGridViewCellInfo : NSObject <DTGridViewCellInfoProtocol> {
 	NSInteger xPosition, yPosition;
 	CGRect frame;
@@ -99,6 +102,10 @@ NSInteger intSort(id info1, id info2, void *context) {
 }
 
 - (void)dctInternal_setupInternals {
+	numberOfRows = DTGridViewInvalid;
+	columnIndexOfSelectedCell = DTGridViewInvalid;
+	rowIndexOfSelectedCell = DTGridViewInvalid;
+	
 	gridRows = [[NSMutableArray alloc] init];
 	rowPositions = [[NSMutableArray alloc] init];
 	rowHeights = [[NSMutableArray alloc] init];
@@ -131,8 +138,6 @@ NSInteger intSort(id info1, id info2, void *context) {
 }
 
 - (void)drawRect:(CGRect)rect {
-	columnIndexOfSelectedCell = -1;
-	rowIndexOfSelectedCell = -1;
 	
 	oldContentOffset = 	CGPointMake(0.0, 0.0);
 		
@@ -757,6 +762,18 @@ NSInteger intSort(id info1, id info2, void *context) {
 	
 	if ([self.delegate respondsToSelector:@selector(gridView:selectionMadeAtRow:column:)])
 		[self.delegate gridView:self selectionMadeAtRow:cell.yPosition column:cell.xPosition];
+}
+
+
+#pragma mark -
+#pragma mark Accessors
+
+- (NSInteger)numberOfRows {
+	if (numberOfRows = DTGridViewInvalid) {
+		numberOfRows = [self.dataSource numberOfRowsInGridView:self];
+	}
+	
+	return numberOfRows;
 }
 
 @end
