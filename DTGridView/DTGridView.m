@@ -47,6 +47,18 @@
 @synthesize dataSource, gridCells, numberOfRows, cellOffset, outset;
 @synthesize decelerationTimer, draggingTimer;
 
+- (void)dealloc {
+	super.delegate = nil;
+	self.dataSource = nil;
+	[cellsOnScreen release], cellsOnScreen = nil;
+	[gridRows release], gridRows = nil;
+	[rowPositions release], rowPositions = nil;
+	[rowHeights release], rowHeights = nil;
+	[freeCells release], freeCells = nil;
+	[cellInfoForCellsOnScreen release], cellInfoForCellsOnScreen = nil;
+    [super dealloc];
+}
+
 - (void)setGridDelegate:(id <DTGridViewDelegate>)aDelegate {
 	self.delegate = aDelegate;
 }
@@ -172,16 +184,6 @@ NSInteger intSort(id info1, id info2, void *context) {
 	self.draggingTimer = nil;
 	[self didEndDragging];
 	[self didEndMoving];
-}
-
-- (void)dealloc {
-	super.delegate = nil;
-	self.dataSource = nil;
-	[cellsOnScreen release];
-	[gridRows release];
-	[rowPositions release];
-	[rowHeights release];
-    [super dealloc];
 }
 
 #pragma mark Adding and Removing Cells
