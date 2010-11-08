@@ -134,6 +134,7 @@ NSInteger intSort(id info1, id info2, void *context) {
 
 - (void)reloadData {
 	[self loadData];
+	[self setNeedsDisplay];
 	[self setNeedsLayout];
 }
 
