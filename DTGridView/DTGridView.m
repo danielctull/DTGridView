@@ -148,7 +148,8 @@ NSInteger intSort(id info1, id info2, void *context) {
 	[self loadData];
 	
 	for (UIView *v in self.subviews)
-		[v removeFromSuperview];
+        if ([v isKindOfClass:[DTGridViewCell class]])
+             [v removeFromSuperview];
 	
 	[self initialiseViews];
 	
@@ -263,15 +264,50 @@ NSInteger intSort(id info1, id info2, void *context) {
 	[cell release];
 }
 
+- (CGRect)visibleRect {
+    CGRect visibleRect;
+    visibleRect.origin = self.contentOffset;
+    visibleRect.size = self.bounds.size;
+	return visibleRect;
+}
+
+- (BOOL)rowOfCellInfoShouldBeOnShow:(NSObject<DTGridViewCellInfoProtocol> *)info {
+	
+	CGRect visibleRect = [self visibleRect];
+	
+	CGRect infoFrame = info.frame;
+    
+    CGFloat infoBottom = infoFrame.origin.y + infoFrame.size.height;
+    CGFloat infoTop = infoFrame.origin.y;
+    
+    CGFloat visibleBottom = visibleRect.origin.y + visibleRect.size.height;
+    CGFloat visibleTop = visibleRect.origin.y;
+    
+    return (infoBottom >= visibleTop &&
+            infoTop <= visibleBottom);
+}
+
 - (BOOL)cellInfoShouldBeOnShow:(NSObject<DTGridViewCellInfoProtocol> *)info {
 	
 	if (!info || ![info isMemberOfClass:[DTGridViewCellInfo class]]) return NO;
 	
-	return (!(info.frame.origin.x + info.frame.size.width < self.contentOffset.x
-			  || info.frame.origin.y + info.frame.size.height < self.contentOffset.y
-			  || info.frame.origin.x > self.contentOffset.x + self.frame.size.width
-			  || info.frame.origin.y > self.contentOffset.y + self.frame.size.height));
+    CGRect visibleRect = [self visibleRect];
+    
+    CGFloat infoRight = info.frame.origin.x + info.frame.size.width;
+    CGFloat infoLeft = info.frame.origin.x;
+    
+	CGFloat visibleRight = visibleRect.origin.x + visibleRect.size.width;
+    CGFloat visibleLeft = visibleRect.origin.x;
+    
+    if (infoRight >= visibleLeft &&
+		infoLeft <=  visibleRight &&
+		[self rowOfCellInfoShouldBeOnShow:info]) return YES;
+	
+	//NSLog(@"%@ NO: %@", NSStringFromSelector(_cmd), NSStringFromCGRect(info.frame));
+	
+	return NO;
 }
+
 
 #pragma mark -
 #pragma mark Finding Infomation from DataSource
@@ -428,6 +464,8 @@ NSInteger intSort(id info1, id info2, void *context) {
 		isGoingRight = YES;
 	else if (hasResized)
 		isGoingRight = YES;
+    
+  //  NSLog(@"isGoingUp: %i, isGoingDown: %i, co.y: %f, old.y: %f", isGoingUp, isGoingDown, self.contentOffset.y, oldContentOffset.y);
 	
 	hasResized = NO;
 	oldContentOffset = self.contentOffset;
@@ -541,9 +579,11 @@ NSInteger intSort(id info1, id info2, void *context) {
 
 - (void)checkNewRowStartingWithCellInfo:(NSObject<DTGridViewCellInfoProtocol> *)info goingUp:(BOOL)goingUp {
 	
+    //NSLog(@"%@", info);
+    
 	if (!info) return;
 		
-	if (!(info.frame.origin.y + info.frame.size.height >= self.contentOffset.y && info.frame.origin.y <= self.contentOffset.y + self.frame.size.height)) return;
+	if (![self rowOfCellInfoShouldBeOnShow:info]) return;
 	
 	NSObject<DTGridViewCellInfoProtocol> *infoToCheck = info;
 	
