@@ -773,8 +773,6 @@ NSInteger intSort(id info1, id info2, void *context) {
 	[self scrollViewToRow:rowIndex column:columnIndex scrollPosition:position animated:animated];
 }
 
-- (void)positionCheck {}
-
 - (void)fireEdgeScroll {
 	
 	if (self.pagingEnabled)
@@ -810,7 +808,7 @@ NSInteger intSort(id info1, id info2, void *context) {
 #pragma mark Accessors
 
 - (NSInteger)numberOfRows {
-	if (numberOfRows = DTGridViewInvalid) {
+	if (numberOfRows == DTGridViewInvalid) {
 		numberOfRows = [self.dataSource numberOfRowsInGridView:self];
 	}
 	

@@ -10,15 +10,11 @@
 #import "DTGridView.h"
 
 
-@interface DTInfiniteGridView : DTGridView {
-	BOOL infiniteVerticalScrolling, infiniteHorizontalScrolling;
-	
+@interface DTInfiniteGridView : DTGridView {	
 	NSInteger fakeNumberOfRows;
-	//NSMutableArray *numberOfColumns;
 	NSMutableDictionary *numberOfColumns;
 	
 	NSInteger segmentMultiplier;
-	
 }
 
 @property (nonatomic, assign) BOOL infiniteVerticalScrolling, infiniteHorizontalScrolling;

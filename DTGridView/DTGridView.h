@@ -183,8 +183,6 @@ struct DTOutset {
 */
 - (void)reloadData;
 
-- (void)positionCheck;
-
 @end
 #pragma mark -
 @protocol DTGridViewDelegate <UIScrollViewDelegate>
