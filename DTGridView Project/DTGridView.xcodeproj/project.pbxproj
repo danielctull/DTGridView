@@ -11,13 +11,6 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		2428E8A5112374BF0019252F /* DTGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2428E89D112374BF0019252F /* DTGridView.m */; };
-		2428E8A7112374BF0019252F /* DTGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2428E8A0112374BF0019252F /* DTGridViewCell.m */; };
-		2428E8A8112374BF0019252F /* DTGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2428E8A3112374BF0019252F /* DTGridViewController.m */; };
-		2428E8B1112374E00019252F /* DTLabelsSnapGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2428E8AC112374E00019252F /* DTLabelsSnapGridViewCell.m */; };
-		2428E8B2112374E00019252F /* DTSnapGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2428E8AE112374E00019252F /* DTSnapGridView.m */; };
-		2428E8B3112374E00019252F /* DTSnapGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2428E8B0112374E00019252F /* DTSnapGridViewCell.m */; };
-		2428E8B7112374E90019252F /* DTInfiniteGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2428E8B6112374E90019252F /* DTInfiniteGridView.m */; };
 		2428E8D0112375660019252F /* DTGridViewExampleDataSourceAndDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2428E8C9112375660019252F /* DTGridViewExampleDataSourceAndDelegate.m */; };
 		2428E8D1112375660019252F /* DTInfiniteGridViewExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2428E8CB112375660019252F /* DTInfiniteGridViewExampleViewController.m */; };
 		2428E8D2112375660019252F /* DTSnapGridViewExampleCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2428E8CC112375660019252F /* DTSnapGridViewExampleCellView.xib */; };
@@ -27,7 +20,13 @@
 		2428E906112377B30019252F /* DTLicenseAgreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2428E903112377B30019252F /* DTLicenseAgreementViewController.m */; };
 		2428E907112377B30019252F /* license.html in Resources */ = {isa = PBXBuildFile; fileRef = 2428E904112377B30019252F /* license.html */; };
 		2428E919112379F10019252F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2428E918112379F10019252F /* Icon.png */; };
-		24E8BB82127F549B00E451F4 /* DTGridViewExampleDataSourceAndDelegate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24E8BB81127F549B00E451F4 /* DTGridViewExampleDataSourceAndDelegate.xib */; };
+		24388F8512B8D4F800848476 /* DTGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24388EA212B8D4F800848476 /* DTGridView.m */; };
+		24388F8612B8D4F800848476 /* DTGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24388EA412B8D4F800848476 /* DTGridViewCell.m */; };
+		24388F8712B8D4F800848476 /* DTGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24388EA712B8D4F800848476 /* DTGridViewController.m */; };
+		24388F8812B8D4F800848476 /* DTInfiniteGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24388EAA12B8D4F800848476 /* DTInfiniteGridView.m */; };
+		24388F8912B8D4F800848476 /* DTLabelsSnapGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24388EAD12B8D4F800848476 /* DTLabelsSnapGridViewCell.m */; };
+		24388F8A12B8D4F800848476 /* DTSnapGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24388EAF12B8D4F800848476 /* DTSnapGridView.m */; };
+		24388F8B12B8D4F800848476 /* DTSnapGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24388EB112B8D4F800848476 /* DTSnapGridViewCell.m */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 /* End PBXBuildFile section */
@@ -38,21 +37,6 @@
 		1D3623250D0F684500981E51 /* DTGridViewAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGridViewAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* DTGridView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DTGridView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		2428E89C112374BF0019252F /* DTGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGridView.h; sourceTree = "<group>"; };
-		2428E89D112374BF0019252F /* DTGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGridView.m; sourceTree = "<group>"; };
-		2428E89F112374BF0019252F /* DTGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGridViewCell.h; sourceTree = "<group>"; };
-		2428E8A0112374BF0019252F /* DTGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGridViewCell.m; sourceTree = "<group>"; };
-		2428E8A1112374BF0019252F /* DTGridViewCellInfoProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGridViewCellInfoProtocol.h; sourceTree = "<group>"; };
-		2428E8A2112374BF0019252F /* DTGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGridViewController.h; sourceTree = "<group>"; };
-		2428E8A3112374BF0019252F /* DTGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGridViewController.m; sourceTree = "<group>"; };
-		2428E8AB112374E00019252F /* DTLabelsSnapGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLabelsSnapGridViewCell.h; sourceTree = "<group>"; };
-		2428E8AC112374E00019252F /* DTLabelsSnapGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLabelsSnapGridViewCell.m; sourceTree = "<group>"; };
-		2428E8AD112374E00019252F /* DTSnapGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTSnapGridView.h; sourceTree = "<group>"; };
-		2428E8AE112374E00019252F /* DTSnapGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTSnapGridView.m; sourceTree = "<group>"; };
-		2428E8AF112374E00019252F /* DTSnapGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTSnapGridViewCell.h; sourceTree = "<group>"; };
-		2428E8B0112374E00019252F /* DTSnapGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTSnapGridViewCell.m; sourceTree = "<group>"; };
-		2428E8B5112374E90019252F /* DTInfiniteGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTInfiniteGridView.h; sourceTree = "<group>"; };
-		2428E8B6112374E90019252F /* DTInfiniteGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTInfiniteGridView.m; sourceTree = "<group>"; };
 		2428E8C8112375660019252F /* DTGridViewExampleDataSourceAndDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGridViewExampleDataSourceAndDelegate.h; sourceTree = "<group>"; };
 		2428E8C9112375660019252F /* DTGridViewExampleDataSourceAndDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGridViewExampleDataSourceAndDelegate.m; sourceTree = "<group>"; };
 		2428E8CA112375660019252F /* DTInfiniteGridViewExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTInfiniteGridViewExampleViewController.h; sourceTree = "<group>"; };
@@ -66,7 +50,21 @@
 		2428E903112377B30019252F /* DTLicenseAgreementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLicenseAgreementViewController.m; sourceTree = "<group>"; };
 		2428E904112377B30019252F /* license.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = license.html; sourceTree = "<group>"; };
 		2428E918112379F10019252F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		24E8BB81127F549B00E451F4 /* DTGridViewExampleDataSourceAndDelegate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DTGridViewExampleDataSourceAndDelegate.xib; sourceTree = "<group>"; };
+		24388EA112B8D4F800848476 /* DTGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGridView.h; sourceTree = "<group>"; };
+		24388EA212B8D4F800848476 /* DTGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGridView.m; sourceTree = "<group>"; };
+		24388EA312B8D4F800848476 /* DTGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGridViewCell.h; sourceTree = "<group>"; };
+		24388EA412B8D4F800848476 /* DTGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGridViewCell.m; sourceTree = "<group>"; };
+		24388EA512B8D4F800848476 /* DTGridViewCellInfoProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGridViewCellInfoProtocol.h; sourceTree = "<group>"; };
+		24388EA612B8D4F800848476 /* DTGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGridViewController.h; sourceTree = "<group>"; };
+		24388EA712B8D4F800848476 /* DTGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGridViewController.m; sourceTree = "<group>"; };
+		24388EA912B8D4F800848476 /* DTInfiniteGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTInfiniteGridView.h; sourceTree = "<group>"; };
+		24388EAA12B8D4F800848476 /* DTInfiniteGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTInfiniteGridView.m; sourceTree = "<group>"; };
+		24388EAC12B8D4F800848476 /* DTLabelsSnapGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLabelsSnapGridViewCell.h; sourceTree = "<group>"; };
+		24388EAD12B8D4F800848476 /* DTLabelsSnapGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLabelsSnapGridViewCell.m; sourceTree = "<group>"; };
+		24388EAE12B8D4F800848476 /* DTSnapGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTSnapGridView.h; sourceTree = "<group>"; };
+		24388EAF12B8D4F800848476 /* DTSnapGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTSnapGridView.m; sourceTree = "<group>"; };
+		24388EB012B8D4F800848476 /* DTSnapGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTSnapGridViewCell.h; sourceTree = "<group>"; };
+		24388EB112B8D4F800848476 /* DTSnapGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTSnapGridViewCell.m; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -95,7 +93,6 @@
 				1D3623250D0F684500981E51 /* DTGridViewAppDelegate.m */,
 				2428E8C8112375660019252F /* DTGridViewExampleDataSourceAndDelegate.h */,
 				2428E8C9112375660019252F /* DTGridViewExampleDataSourceAndDelegate.m */,
-				24E8BB81127F549B00E451F4 /* DTGridViewExampleDataSourceAndDelegate.xib */,
 				2428E8CA112375660019252F /* DTInfiniteGridViewExampleViewController.h */,
 				2428E8CB112375660019252F /* DTInfiniteGridViewExampleViewController.m */,
 				2428E8CC112375660019252F /* DTSnapGridViewExampleCellView.xib */,
@@ -114,42 +111,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2428E89B112374BF0019252F /* DTGridView */ = {
-			isa = PBXGroup;
-			children = (
-				2428E89C112374BF0019252F /* DTGridView.h */,
-				2428E89D112374BF0019252F /* DTGridView.m */,
-				2428E89F112374BF0019252F /* DTGridViewCell.h */,
-				2428E8A0112374BF0019252F /* DTGridViewCell.m */,
-				2428E8A1112374BF0019252F /* DTGridViewCellInfoProtocol.h */,
-				2428E8A2112374BF0019252F /* DTGridViewController.h */,
-				2428E8A3112374BF0019252F /* DTGridViewController.m */,
-			);
-			path = DTGridView;
-			sourceTree = "<group>";
-		};
-		2428E8AA112374E00019252F /* DTSnapGridView */ = {
-			isa = PBXGroup;
-			children = (
-				2428E8AB112374E00019252F /* DTLabelsSnapGridViewCell.h */,
-				2428E8AC112374E00019252F /* DTLabelsSnapGridViewCell.m */,
-				2428E8AD112374E00019252F /* DTSnapGridView.h */,
-				2428E8AE112374E00019252F /* DTSnapGridView.m */,
-				2428E8AF112374E00019252F /* DTSnapGridViewCell.h */,
-				2428E8B0112374E00019252F /* DTSnapGridViewCell.m */,
-			);
-			path = DTSnapGridView;
-			sourceTree = "<group>";
-		};
-		2428E8B4112374E90019252F /* DTInfiniteGridView */ = {
-			isa = PBXGroup;
-			children = (
-				2428E8B5112374E90019252F /* DTInfiniteGridView.h */,
-				2428E8B6112374E90019252F /* DTInfiniteGridView.m */,
-			);
-			path = DTInfiniteGridView;
-			sourceTree = "<group>";
-		};
 		2428E900112377B30019252F /* License Agreement */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,13 +122,50 @@
 			path = "License Agreement";
 			sourceTree = "<group>";
 		};
+		24388D3912B8D4F700848476 /* DTGridView */ = {
+			isa = PBXGroup;
+			children = (
+				24388EA112B8D4F800848476 /* DTGridView.h */,
+				24388EA212B8D4F800848476 /* DTGridView.m */,
+				24388EA312B8D4F800848476 /* DTGridViewCell.h */,
+				24388EA412B8D4F800848476 /* DTGridViewCell.m */,
+				24388EA512B8D4F800848476 /* DTGridViewCellInfoProtocol.h */,
+				24388EA612B8D4F800848476 /* DTGridViewController.h */,
+				24388EA712B8D4F800848476 /* DTGridViewController.m */,
+				24388EA812B8D4F800848476 /* DTInfiniteGridView */,
+				24388EAB12B8D4F800848476 /* DTSnapGridView */,
+			);
+			name = DTGridView;
+			path = /Users/danielctull/Dropbox/Programs/Cocoa/Frameworks/DTGridView;
+			sourceTree = "<absolute>";
+		};
+		24388EA812B8D4F800848476 /* DTInfiniteGridView */ = {
+			isa = PBXGroup;
+			children = (
+				24388EA912B8D4F800848476 /* DTInfiniteGridView.h */,
+				24388EAA12B8D4F800848476 /* DTInfiniteGridView.m */,
+			);
+			path = DTInfiniteGridView;
+			sourceTree = "<group>";
+		};
+		24388EAB12B8D4F800848476 /* DTSnapGridView */ = {
+			isa = PBXGroup;
+			children = (
+				24388EAC12B8D4F800848476 /* DTLabelsSnapGridViewCell.h */,
+				24388EAD12B8D4F800848476 /* DTLabelsSnapGridViewCell.m */,
+				24388EAE12B8D4F800848476 /* DTSnapGridView.h */,
+				24388EAF12B8D4F800848476 /* DTSnapGridView.m */,
+				24388EB012B8D4F800848476 /* DTSnapGridViewCell.h */,
+				24388EB112B8D4F800848476 /* DTSnapGridViewCell.m */,
+			);
+			path = DTSnapGridView;
+			sourceTree = "<group>";
+		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				24388D3912B8D4F700848476 /* DTGridView */,
 				2428E900112377B30019252F /* License Agreement */,
-				2428E89B112374BF0019252F /* DTGridView */,
-				2428E8AA112374E00019252F /* DTSnapGridView */,
-				2428E8B4112374E90019252F /* DTInfiniteGridView */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -258,7 +256,6 @@
 				2428E905112377B30019252F /* DTLicenseAgreementView.xib in Resources */,
 				2428E907112377B30019252F /* license.html in Resources */,
 				2428E919112379F10019252F /* Icon.png in Resources */,
-				24E8BB82127F549B00E451F4 /* DTGridViewExampleDataSourceAndDelegate.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,17 +268,17 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* DTGridViewAppDelegate.m in Sources */,
-				2428E8A5112374BF0019252F /* DTGridView.m in Sources */,
-				2428E8A7112374BF0019252F /* DTGridViewCell.m in Sources */,
-				2428E8A8112374BF0019252F /* DTGridViewController.m in Sources */,
-				2428E8B1112374E00019252F /* DTLabelsSnapGridViewCell.m in Sources */,
-				2428E8B2112374E00019252F /* DTSnapGridView.m in Sources */,
-				2428E8B3112374E00019252F /* DTSnapGridViewCell.m in Sources */,
-				2428E8B7112374E90019252F /* DTInfiniteGridView.m in Sources */,
 				2428E8D0112375660019252F /* DTGridViewExampleDataSourceAndDelegate.m in Sources */,
 				2428E8D1112375660019252F /* DTInfiniteGridViewExampleViewController.m in Sources */,
 				2428E8D4112375660019252F /* DTSnapGridViewExampleViewController.m in Sources */,
 				2428E906112377B30019252F /* DTLicenseAgreementViewController.m in Sources */,
+				24388F8512B8D4F800848476 /* DTGridView.m in Sources */,
+				24388F8612B8D4F800848476 /* DTGridViewCell.m in Sources */,
+				24388F8712B8D4F800848476 /* DTGridViewController.m in Sources */,
+				24388F8812B8D4F800848476 /* DTInfiniteGridView.m in Sources */,
+				24388F8912B8D4F800848476 /* DTLabelsSnapGridViewCell.m in Sources */,
+				24388F8A12B8D4F800848476 /* DTSnapGridView.m in Sources */,
+				24388F8B12B8D4F800848476 /* DTSnapGridViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

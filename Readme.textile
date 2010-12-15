@@ -1,0 +1,51 @@
+h1. DTGridView
+
+A two-dimensional scrolling view component for the iPhone, heavily inspired by UITableView.
+
+*WARNING* DTGridView 1.1 moves the location of all of the classes, so you may need to jiggle things about when updating.
+
+h2. Branch Structure
+
+There are two branches to this repository, *master* and *production*, these are described below. (Thanks to "Abizer":https://github.com/Abizern for showing me this method.)
+
+h3. The master Branch
+
+The master branch contains the class extension files as well as an Xcode project that demonstrates the code and is the branch to use to see how to use the code. It as also the branch that further development of the code should be performed on.
+
+h3. The production Branch
+
+The production branch should be used if you want to add these extensions as a git submodule in other projects and will only contain the class files themselves without the Xcode project or example classes. This is preferable as it will keep your directories clean of any code which is unnecessary to your working project, of course you can switch branches in the submodule to access the given samples.
+
+Changes made to the master branch will be merged across to production, so it will always remain current with respect to master.
+
+To add the production branch rather than master, simply use the -b flag as shown below.
+
+bc. git submodule add -b production git://github.com/danielctull/DTGridView.git
+
+To keep up to date with the latest changes `cd` into the directory that contains this submodule and pull the newest changes as usual
+
+bc. git pull origin
+
+h3. Artefacts
+
+Sometimes, there may be artefacts left over when switching from master to production. These are files that are ignored by git and are easily cleaned up by running
+
+bc. git clean -dxf
+
+h2. Examples
+
+Examples of some of these features can be found in the iPhone app delegate.
+
+h2. License
+
+Copyright (C) 2010 Daniel Tull. All rights reserved.
+ 
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ 
+* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ 
+* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ 
+* Neither the name of the author nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+ 
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
