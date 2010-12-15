@@ -733,8 +733,6 @@ NSInteger intSort(id info1, id info2, void *context) {
 	[self scrollViewToRow:rowIndex column:columnIndex scrollPosition:position animated:animated];
 }
 
-- (void)positionCheck {}
-
 - (void)fireEdgeScroll {
 	
 	if (self.pagingEnabled)
