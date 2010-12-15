@@ -295,6 +295,7 @@
 				GCC_PREFIX_HEADER = DTGridView_Prefix.pch;
 				INFOPLIST_FILE = "DTGridView-Info.plist";
 				PRODUCT_NAME = DTGridView;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
