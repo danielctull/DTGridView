@@ -90,30 +90,35 @@
 }
 
 
-- (void)positionCheck {
-	
-	if (!self.infiniteHorizontalScrolling && !self.infiniteVerticalScrolling)
-		return;
-	
-	CGFloat segmentWidth = self.contentSize.width/5;
-	
-	//CGFloat twotimes = 2*segmentWidth;
+- (void)layoutSubviews {
 	
 	CGFloat newX = self.contentOffset.x;
 	CGFloat newY = self.contentOffset.y;
 	
-	//NSLog(@"%s:%f %f", _cmd, segmentWidth, self.contentOffset.x);
+	if (self.infiniteHorizontalScrolling) {
+		
+		CGFloat segmentWidth = self.contentSize.width/5;
+		
+		if (self.contentOffset.x < 2*segmentWidth)
+			newX = self.contentOffset.x + segmentWidth;
+		else if (self.contentOffset.x > 3*segmentWidth)
+			newX = self.contentOffset.x - segmentWidth;		
+	}
 	
-	if (self.contentOffset.x < 2*segmentWidth)
-		newX = self.contentOffset.x + segmentWidth;
-	else if (self.contentOffset.x > 3*segmentWidth)
-		newX = self.contentOffset.x - segmentWidth;
+	
+	if (self.infiniteVerticalScrolling) {
 		
-	//NSLog(@"%s:%f", _cmd, newX);
+		CGFloat segmentHeight = self.contentSize.height/5;
 		
+		if (self.contentOffset.y < 2*segmentHeight)
+			newY = self.contentOffset.y + segmentHeight;
+		else if (self.contentOffset.y > 3*segmentHeight)
+			newY = self.contentOffset.y - segmentHeight;	
+	}
+	
 	self.contentOffset = CGPointMake(newX, newY);
 	
-		
+	[super layoutSubviews];
 }
 
 @end
