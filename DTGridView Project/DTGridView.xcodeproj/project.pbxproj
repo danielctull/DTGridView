@@ -136,8 +136,8 @@
 				24388EAB12B8D4F800848476 /* DTSnapGridView */,
 			);
 			name = DTGridView;
-			path = /Users/danielctull/Dropbox/Programs/Cocoa/Frameworks/DTGridView;
-			sourceTree = "<absolute>";
+			path = ..;
+			sourceTree = SOURCE_ROOT;
 		};
 		24388EA812B8D4F800848476 /* DTInfiniteGridView */ = {
 			isa = PBXGroup;

@@ -427,9 +427,14 @@ NSInteger intSort(id info1, id info2, void *context) {
 		NSSet *gridCellsSet = [NSSet setWithArray:self.gridCells];
 		NSArray *subviewsCopy = [self.subviews copy];
 		
-		for (DTGridViewCell *cell in subviewsCopy) {
-			if (![gridCellsSet member:cell])
+		for (UIView *cell in subviewsCopy) {
+			if (
+                [cell isKindOfClass:[DTGridViewCell class]] &&
+                ![gridCellsSet member:cell]
+                )
+            {
 				[cell removeFromSuperview];
+            }
 		}
 		
 		[subviewsCopy release];
