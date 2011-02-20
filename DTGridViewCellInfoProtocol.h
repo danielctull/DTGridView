@@ -7,6 +7,6 @@
 //
 
 @protocol DTGridViewCellInfoProtocol
-@property (nonatomic, assign) NSInteger xPosition, yPosition;
+@property (nonatomic, assign) NSUInteger xPosition, yPosition;
 @property (nonatomic, assign) CGRect frame;
 @end

@@ -44,7 +44,7 @@
 }
 
 - (CGFloat)findWidthForRow:(NSInteger)row column:(NSInteger)column {
-	NSInteger w = (NSInteger)self.frame.size.width/3;
+	NSInteger w = (NSInteger)self.frame.size.width/3.0f;
 	return (CGFloat)w;
 }
 

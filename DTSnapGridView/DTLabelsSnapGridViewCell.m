@@ -46,10 +46,10 @@
 	NSInteger halfHeight = (NSInteger)(self.frame.size.height/2.0);
 	
 	CGSize labelSize = [self.titleLabel.text sizeWithFont:self.titleLabel.font];
-	self.titleLabel.frame = CGRectMake(0.0, halfHeight-labelSize.height, labelSize.width, labelSize.height);
+	self.titleLabel.frame = CGRectMake(0.0f, halfHeight-labelSize.height, labelSize.width, labelSize.height);
 	
 	labelSize = [self.subtitleLabel.text sizeWithFont:self.subtitleLabel.font];
-	self.subtitleLabel.frame = CGRectMake(0.0, halfHeight+1.0, labelSize.width, labelSize.height);
+	self.subtitleLabel.frame = CGRectMake(0.0f, halfHeight+1.0f, labelSize.width, labelSize.height);
 	
 	[self addSubview:self.titleLabel];
 	[self addSubview:self.subtitleLabel];
