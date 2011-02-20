@@ -96,8 +96,8 @@ struct DTOutset {
 		
 	NSInteger numberOfRows;
 	
-	NSInteger rowIndexOfSelectedCell;
-	NSInteger columnIndexOfSelectedCell;
+	NSUInteger rowIndexOfSelectedCell;
+	NSUInteger columnIndexOfSelectedCell;
 	
 	NSTimer *decelerationTimer;
 	NSTimer *draggingTimer;
@@ -160,7 +160,7 @@ struct DTOutset {
  @param columnIndex The index of the column of the wanted cell.
  @return The grid view cell of the grid or nil if the cell is not visible or the indexes is out of range.
  */
-- (DTGridViewCell *)cellForRow:(NSInteger)rowIndex column:(NSInteger)columnIndex;
+- (DTGridViewCell *)cellForRow:(NSUInteger)rowIndex column:(NSUInteger)columnIndex;
 
 /*!
  @abstract A constant that identifies a relative position in the receiving table view (top, middle, bottom) for row when scrolling concludes. See “Table View Scroll Position” a descriptions of valid constants.
@@ -169,9 +169,9 @@ struct DTOutset {
  @param position The position the cell should be in once scrolled to.
  @param animated If this 
 */
-- (void)scrollViewToRow:(NSInteger)rowIndex column:(NSInteger)columnIndex scrollPosition:(DTGridViewScrollPosition)position animated:(BOOL)animated;
+- (void)scrollViewToRow:(NSUInteger)rowIndex column:(NSUInteger)columnIndex scrollPosition:(DTGridViewScrollPosition)position animated:(BOOL)animated;
 
-- (void)selectRow:(NSInteger)rowIndex column:(NSInteger)columnIndex scrollPosition:(DTGridViewScrollPosition)position animated:(BOOL)animated;
+- (void)selectRow:(NSUInteger)rowIndex column:(NSUInteger)columnIndex scrollPosition:(DTGridViewScrollPosition)position animated:(BOOL)animated;
 
 /*!
  @abstract This method should be used by subclasses to know when the grid did appear on screen.

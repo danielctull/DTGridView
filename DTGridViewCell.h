@@ -18,7 +18,7 @@
 */
 @interface DTGridViewCell : UIView <DTGridViewCellInfoProtocol> {
 
-	NSInteger xPosition, yPosition;
+	NSUInteger xPosition, yPosition;
 	NSString *identifier;
 	
 	BOOL selected;

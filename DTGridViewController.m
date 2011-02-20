@@ -35,14 +35,14 @@
 - (NSInteger)numberOfRowsInGridView:(DTGridView *)gridView {
 	return 0;
 }
-- (NSInteger)numberOfColumnsInGridView:(DTGridView *)gridView forRowWithIndex:(NSInteger)index {
+- (NSInteger)numberOfColumnsInGridView:(DTGridView *)gridView forRowWithIndex:(NSInteger)theIndex {
 	return 0;
 }
 - (CGFloat)gridView:(DTGridView *)gridView heightForRow:(NSInteger)rowIndex {
-	return 0.0;
+	return 0.0f;
 }
 - (CGFloat)gridView:(DTGridView *)gridView widthForCellAtRow:(NSInteger)rowIndex column:(NSInteger)columnIndex {
-	return 0.0;
+	return 0.0f;
 }
 - (DTGridViewCell *)gridView:(DTGridView *)gridView viewForRow:(NSInteger)rowIndex column:(NSInteger)columnIndex {
 	return nil;
