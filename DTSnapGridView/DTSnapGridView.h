@@ -10,14 +10,14 @@
 #import "DTGridView.h"
 #import "DTSnapGridViewCell.h"
 
-@protocol DTSnapGridViewDelegate;
+@class DTSnapGridView;
+
+@protocol DTSnapGridViewDelegate <DTGridViewDelegate>
+- (void)snapGridView:(DTSnapGridView *)snapGridView didHighlightIndex:(NSInteger)index;
+@end
 
 @interface DTSnapGridView : DTGridView {
 	DTSnapGridViewCell *selectedCell;
 }
 @property (nonatomic, assign) IBOutlet id<DTSnapGridViewDelegate> delegate;
-@end
-
-@protocol DTSnapGridViewDelegate <DTGridViewDelegate>
-- (void)snapGridView:(DTSnapGridView *)snapGridView didHighlightIndex:(NSInteger)index;
 @end
