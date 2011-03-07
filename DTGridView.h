@@ -61,9 +61,48 @@ struct DTOutset {
 	CGFloat right;
 };
 
-@protocol DTGridViewDelegate;
-@protocol DTGridViewDataSource;
+@class DTGridView;
 
+@protocol DTGridViewDelegate <UIScrollViewDelegate>
+
+@optional
+/*!
+ Called when the grid view loads.
+ */
+- (void)gridViewDidLoad:(DTGridView *)gridView;
+- (void)gridView:(DTGridView *)gridView selectionMadeAtRow:(NSInteger)rowIndex column:(NSInteger)columnIndex;
+- (void)gridView:(DTGridView *)gridView scrolledToEdge:(DTGridViewEdge)edge;
+- (void)pagedGridView:(DTGridView *)gridView didScrollToRow:(NSInteger)rowIndex column:(NSInteger)columnIndex;
+- (void)gridView:(DTGridView *)gridView didProgrammaticallyScrollToRow:(NSInteger)rowIndex column:(NSInteger)columnIndex;
+@end
+
+#pragma mark -
+
+@protocol DTGridViewDataSource
+/*!
+ Asks the data source to return the number of rows in the grid view.
+ The grid view object requesting this information.
+ @return The number of rows in the grid view.
+ */
+- (NSInteger)numberOfRowsInGridView:(DTGridView *)gridView;
+/*!
+ @abstract Asks the data source to return the number of columns for the given row in the grid view.
+ @para The grid view object requesting this information.
+ @para The index of the given row.
+ @return The number of colums in the row of the grid view.
+ */
+- (NSInteger)numberOfColumnsInGridView:(DTGridView *)gridView forRowWithIndex:(NSInteger)index;
+- (CGFloat)gridView:(DTGridView *)gridView heightForRow:(NSInteger)rowIndex;
+- (CGFloat)gridView:(DTGridView *)gridView widthForCellAtRow:(NSInteger)rowIndex column:(NSInteger)columnIndex;
+- (DTGridViewCell *)gridView:(DTGridView *)gridView viewForRow:(NSInteger)rowIndex column:(NSInteger)columnIndex;
+
+@optional
+- (NSInteger)spacingBetweenRowsInGridView:(DTGridView *)gridView;
+- (NSInteger)spacingBetweenColumnsInGridView:(DTGridView *)gridView;
+
+@end
+
+#pragma mark -
 
 /*!
  @class DTGridView
@@ -182,43 +221,5 @@ struct DTOutset {
  @abstract Call this to reload the grid view's data.
 */
 - (void)reloadData;
-
-@end
-#pragma mark -
-@protocol DTGridViewDelegate <UIScrollViewDelegate>
-
-@optional
-/*!
- Called when the grid view loads.
- */
-- (void)gridViewDidLoad:(DTGridView *)gridView;
-- (void)gridView:(DTGridView *)gridView selectionMadeAtRow:(NSInteger)rowIndex column:(NSInteger)columnIndex;
-- (void)gridView:(DTGridView *)gridView scrolledToEdge:(DTGridViewEdge)edge;
-- (void)pagedGridView:(DTGridView *)gridView didScrollToRow:(NSInteger)rowIndex column:(NSInteger)columnIndex;
-- (void)gridView:(DTGridView *)gridView didProgrammaticallyScrollToRow:(NSInteger)rowIndex column:(NSInteger)columnIndex;
-@end
-
-#pragma mark -
-@protocol DTGridViewDataSource
-/*!
- Asks the data source to return the number of rows in the grid view.
-The grid view object requesting this information.
- @return The number of rows in the grid view.
- */
-- (NSInteger)numberOfRowsInGridView:(DTGridView *)gridView;
-/*!
- @abstract Asks the data source to return the number of columns for the given row in the grid view.
- @para The grid view object requesting this information.
- @para The index of the given row.
- @return The number of colums in the row of the grid view.
- */
-- (NSInteger)numberOfColumnsInGridView:(DTGridView *)gridView forRowWithIndex:(NSInteger)index;
-- (CGFloat)gridView:(DTGridView *)gridView heightForRow:(NSInteger)rowIndex;
-- (CGFloat)gridView:(DTGridView *)gridView widthForCellAtRow:(NSInteger)rowIndex column:(NSInteger)columnIndex;
-- (DTGridViewCell *)gridView:(DTGridView *)gridView viewForRow:(NSInteger)rowIndex column:(NSInteger)columnIndex;
-
-@optional
-- (NSInteger)spacingBetweenRowsInGridView:(DTGridView *)gridView;
-- (NSInteger)spacingBetweenColumnsInGridView:(DTGridView *)gridView;
 
 @end
