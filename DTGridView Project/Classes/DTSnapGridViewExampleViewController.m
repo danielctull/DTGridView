@@ -60,7 +60,7 @@
 
 - (DTGridViewCell *)gridView:(DTGridView *)gv viewForRow:(NSInteger)rowIndex column:(NSInteger)columnIndex {
 	
-	NSLog(@"%@:%s", self, _cmd);
+	NSLog(@"%@:%@", self, NSStringFromSelector(_cmd));
 	
 	DTGridViewCell *cell = [gv dequeueReusableCellWithIdentifier:@"cell"];
 	

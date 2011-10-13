@@ -85,7 +85,7 @@
 	else if (columnIndex == 3)
 		view.backgroundColor = [UIColor yellowColor];
 	else
-		NSLog(@"%@:%s FAIL: %i", self, _cmd, columnIndex);
+		NSLog(@"%@:%@ FAIL: %i", self, NSStringFromSelector(_cmd), columnIndex);
 	
 	return [view autorelease];
 }
