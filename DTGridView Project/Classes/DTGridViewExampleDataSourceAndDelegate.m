@@ -146,9 +146,22 @@
 	
 	DTGridViewCell *cell = [gv dequeueReusableCellWithIdentifier:@"cell"];
 		
+    UILabel *indexesLabel = nil;
+    
 	if (!cell) {
 		cell = [[[DTGridViewCell alloc] initWithReuseIdentifier:@"cell"] autorelease];
+        indexesLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)] autorelease];
+        indexesLabel.backgroundColor = [UIColor clearColor];
+        indexesLabel.textAlignment = UITextAlignmentCenter;
+        [cell addSubview:indexesLabel];
 	}
+    else{
+        indexesLabel = [[cell subviews] lastObject];
+    }
+    
+    indexesLabel.text = [NSString stringWithFormat:@"[R:%d|C:%d]",
+                         rowIndex,
+                         columnIndex];
 	
 	cell.backgroundColor = [colours objectAtIndex:(random() % 10)];
 	
