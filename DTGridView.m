@@ -28,6 +28,7 @@ NSInteger const DTGridViewInvalid = -1;
 @end
 
 @interface DTGridView ()
+
 - (void)dctInternal_setupInternals;
 - (void)loadData;
 - (void)checkViews;
@@ -167,8 +168,26 @@ NSInteger intSort(id info1, id info2, void *context) {
 - (void)didEndDecelerating {}
 - (void)didEndMoving {}
 
-- (void)layoutSubviews {
+- (void)layoutSubviews {   
+    if (self.contentSize.width > 0.0 || self.contentSize.height > 0.0){
+        dispatch_once(&driftOnceToken, ^{
+            //Set the offset according to the directionality
+            CGPoint newContentOffset = self.contentOffset;
+            
+            if (self.layoutDirectionality & DTGridViewDirectionalityRightToLeft){
+                newContentOffset.x += ([self realContentSize].width - self.frame.size.width);
+            }
+            
+            if (self.layoutDirectionality & DTGridViewDirectionalityBottomToTop){
+                newContentOffset.y += ([self realContentSize].height - self.frame.size.height);
+            }
+            
+            self.contentOffset = newContentOffset;
+        });
+    }
+    
 	[super layoutSubviews];
+    
 	[self checkViews];
 	[self fireEdgeScroll];
 	
@@ -315,6 +334,16 @@ NSInteger intSort(id info1, id info2, void *context) {
 #pragma mark Finding Infomation from DataSource
 
 - (CGFloat)findWidthForRow:(NSInteger)row column:(NSInteger)column {
+    if (self.layoutDirectionality & DTGridViewDirectionalityBottomToTop){
+        //Flip rows if needed
+        row = [self findNumberOfRows] - row;
+    }
+    
+    if (self.layoutDirectionality & DTGridViewDirectionalityRightToLeft){
+        //Flip columns if needed
+        column = [self findNumberOfColumnsForRow:row] - column - 1;
+    }
+    
 	return [self.dataSource gridView:self widthForCellAtRow:row column:column];
 }
 
@@ -323,16 +352,41 @@ NSInteger intSort(id info1, id info2, void *context) {
 }
 
 - (NSInteger)findNumberOfColumnsForRow:(NSInteger)row {
+    if (self.layoutDirectionality & DTGridViewDirectionalityBottomToTop){
+        //Flip rows if needed
+        row = [self findNumberOfRows] - row;
+    }
+    
 	return [self.dataSource numberOfColumnsInGridView:self forRowWithIndex:row];
 }
 
 - (CGFloat)findHeightForRow:(NSInteger)row {
+    if (self.layoutDirectionality & DTGridViewDirectionalityBottomToTop){
+        //Flip rows if needed
+        row = [self findNumberOfRows] - row;
+    }
+    
 	return [self.dataSource gridView:self heightForRow:row];
 }
 
 - (DTGridViewCell *)findViewForRow:(NSInteger)row column:(NSInteger)column {
+    if (self.layoutDirectionality & DTGridViewDirectionalityBottomToTop){
+        //Flip rows if needed
+        row = [self findNumberOfRows] - row;
+    }
+    
+    if (self.layoutDirectionality & DTGridViewDirectionalityRightToLeft){
+        //Flip columns if needed
+        column = [self findNumberOfColumnsForRow:row] - column - 1;
+    }
+    
 	return [self.dataSource gridView:self viewForRow:row column:column];
 }
+
+- (CGSize)realContentSize{
+    return self.contentSize;
+}
+
 #pragma mark -
 
 - (void)loadData {

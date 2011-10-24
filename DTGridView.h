@@ -160,6 +160,7 @@ struct DTOutset {
 	NSTimer *draggingTimer;
     
     DTGridViewDirectionality layoutDirectionality;
+    dispatch_once_t driftOnceToken; //Helps to make sure we drift the content only once
 }
 
 /*!
@@ -204,6 +205,7 @@ struct DTOutset {
 - (NSInteger)findNumberOfColumnsForRow:(NSInteger)row;
 - (CGFloat)findHeightForRow:(NSInteger)row;
 - (DTGridViewCell *)findViewForRow:(NSInteger)row column:(NSInteger)column;
+- (CGSize)realContentSize;
 
 #pragma mark -
 #pragma mark Regular methods
