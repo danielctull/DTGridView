@@ -48,7 +48,7 @@ NSInteger const DTGridViewInvalid = -1;
 
 @dynamic delegate;
 @synthesize dataSource, gridCells, numberOfRows, cellOffset, outset;
-@synthesize decelerationTimer, draggingTimer;
+@synthesize decelerationTimer, draggingTimer, layoutDirectionality;
 
 - (void)dealloc {
 	super.delegate = nil;
@@ -105,7 +105,8 @@ NSInteger intSort(id info1, id info2, void *context) {
 	numberOfRows = DTGridViewInvalid;
 	columnIndexOfSelectedCell = DTGridViewInvalid;
 	rowIndexOfSelectedCell = DTGridViewInvalid;
-	
+    layoutDirectionality = DTGridViewDirectionalityDefault;
+
 	gridRows = [[NSMutableArray alloc] init];
 	rowPositions = [[NSMutableArray alloc] init];
 	rowHeights = [[NSMutableArray alloc] init];

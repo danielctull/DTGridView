@@ -54,6 +54,24 @@ typedef enum {
 	DTGridViewEdgeRight
 } DTGridViewEdge;
 
+/*!
+ @enum APDirectionality
+ @abstract Used to determin the cells layout direction.
+ @constant DTGridViewDirectionalityLeftToRight Content is layed out from left to right.
+ @constant DTGridViewDirectionalityRightToLeft Content is layed out from right to left.
+ @constant DTGridViewDirectionalityTopToBottom Content is layed out from top to bottom.
+ @constant DTGridViewDirectionalityBottomToTop Content is layed out from bottom to top.
+ @constant DTGridViewDirectionalityDefault By default layout is left to right and from top to bottom
+ @discussion Extended discussion goes here.
+ */
+typedef enum{
+    DTGridViewDirectionalityLeftToRight     = 1 << 0,    /**<  */
+    DTGridViewDirectionalityRightToLeft     = 1 << 1,    /**<  */
+    DTGridViewDirectionalityTopToBottom     = 1 << 2,    /**<  */
+    DTGridViewDirectionalityBottomToTop     = 1 << 3,    /**<  */
+    DTGridViewDirectionalityDefault         = (DTGridViewDirectionalityLeftToRight | DTGridViewDirectionalityTopToBottom),
+}DTGridViewDirectionality;
+
 struct DTOutset {
 	CGFloat top;
 	CGFloat bottom;
@@ -140,6 +158,8 @@ struct DTOutset {
 	
 	NSTimer *decelerationTimer;
 	NSTimer *draggingTimer;
+    
+    DTGridViewDirectionality layoutDirectionality;
 }
 
 /*!
@@ -167,6 +187,7 @@ struct DTOutset {
 @property (assign) UIEdgeInsets outset;
 @property (nonatomic, retain) NSMutableArray *gridCells;
 @property (nonatomic) NSInteger numberOfRows;
+@property (nonatomic, assign) DTGridViewDirectionality layoutDirectionality ;
 
 #pragma mark -
 #pragma mark Subclass methods
