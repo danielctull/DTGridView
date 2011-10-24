@@ -44,6 +44,7 @@
 	self.gridView.delegate = self;
 	self.gridView.dataSource = self;
 	self.gridView.bounces = YES;
+    self.gridView.layoutDirectionality = (DTGridViewDirectionalityRightToLeft | DTGridViewDirectionalityTopToBottom);
 }
 
 - (void)scroll {
