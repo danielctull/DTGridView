@@ -10,9 +10,9 @@
 #import "DTGridViewCell.h"
 
 @interface DTSnapGridViewCell : DTGridViewCell {
-	
+
 	CGFloat slideAmount;
-	
+
 }
 
 @property (nonatomic, assign) CGFloat slideAmount;

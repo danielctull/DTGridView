@@ -13,20 +13,20 @@
 @synthesize snapGridView;
 
 - (id)init {
-	
+
 	if (!(self = [self initWithNibName:@"DTSnapGridViewExampleView" bundle:nil])) return nil;
-	
+
 	self.title = @"DTSnapGridView";
-	
+
 	return self;
-	
+
 }
 
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-	
+
 	// Release any cached data, images, etc that aren't in use.
 }
 
@@ -59,16 +59,16 @@
 }
 
 - (DTGridViewCell *)gridView:(DTGridView *)gv viewForRow:(NSInteger)rowIndex column:(NSInteger)columnIndex {
-	
+
 	NSLog(@"%@:%s", self, _cmd);
-	
+
 	DTGridViewCell *cell = [gv dequeueReusableCellWithIdentifier:@"cell"];
-	
+
 	if (!cell) {
 		cell = [[[NSBundle mainBundle] loadNibNamed:@"DTSnapGridViewExampleCellView" owner:self options:nil] objectAtIndex:0];
 		cell.identifier = @"cell";
 	}
-	
+
 	return cell;
 }
 

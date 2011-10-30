@@ -45,7 +45,7 @@
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-	
+
 	// Release any cached data, images, etc that aren't in use.
 }
 
@@ -72,10 +72,10 @@
 }
 - (DTGridViewCell *)gridView:(DTGridView *)gv viewForRow:(NSInteger)rowIndex column:(NSInteger)columnIndex {
 	DTGridViewCell *view = [[gv dequeueReusableCellWithIdentifier:@"cell"] retain];
-	
+
 	if (!view)
 		view = [[DTGridViewCell alloc] initWithReuseIdentifier:@"cell"];
-	
+
 	if (columnIndex == 0)
 		view.backgroundColor = [UIColor redColor];
 	else if (columnIndex == 1)
@@ -86,7 +86,7 @@
 		view.backgroundColor = [UIColor yellowColor];
 	else
 		NSLog(@"%@:%s FAIL: %i", self, _cmd, columnIndex);
-	
+
 	return [view autorelease];
 }
 

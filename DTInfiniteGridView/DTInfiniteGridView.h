@@ -10,10 +10,10 @@
 #import "DTGridView.h"
 
 
-@interface DTInfiniteGridView : DTGridView {	
+@interface DTInfiniteGridView : DTGridView {
 	NSInteger fakeNumberOfRows;
 	NSMutableDictionary *numberOfColumns;
-	
+
 	NSInteger segmentMultiplier;
 }
 
