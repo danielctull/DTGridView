@@ -106,38 +106,38 @@ struct DTOutset {
 
 /*!
  @class DTGridView
- @abstract 
- @discussion 
+ @abstract
+ @discussion
 */
 @interface DTGridView : UIScrollView <UIScrollViewDelegate, DTGridViewCellDelegate> {
-	
+
 	NSObject<DTGridViewDataSource> *dataSource;
-	
+
 	CGPoint cellOffset;
-	
+
 	UIEdgeInsets outset;
-	
+
 	NSMutableArray *gridCells;
-	
+
 	NSMutableArray *freeCells;
 	NSMutableArray *cellInfoForCellsOnScreen;
-	
+
 	NSMutableArray *gridRows;
 	NSMutableArray *rowHeights;
 	NSMutableArray *rowPositions;
-	
+
 	NSMutableArray *cellsOnScreen;
-	
+
 	CGPoint oldContentOffset;
 	BOOL hasResized;
-	
+
 	BOOL hasLoadedData;
-		
+
 	NSInteger numberOfRows;
-	
+
 	NSUInteger rowIndexOfSelectedCell;
 	NSUInteger columnIndexOfSelectedCell;
-	
+
 	NSTimer *decelerationTimer;
 	NSTimer *draggingTimer;
 }
@@ -171,7 +171,7 @@ struct DTOutset {
 #pragma mark -
 #pragma mark Subclass methods
 
-// These methods can be overridden by subclasses. 
+// These methods can be overridden by subclasses.
 // They should never need to be called from outside classes.
 
 - (void)didEndMoving;
@@ -206,7 +206,7 @@ struct DTOutset {
  @param rowIndex The index of the row to scroll to.
  @param columnIndex The index of the column to scroll to.
  @param position The position the cell should be in once scrolled to.
- @param animated If this 
+ @param animated If this
 */
 - (void)scrollViewToRow:(NSUInteger)rowIndex column:(NSUInteger)columnIndex scrollPosition:(DTGridViewScrollPosition)position animated:(BOOL)animated;
 

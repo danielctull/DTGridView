@@ -24,12 +24,12 @@
 @dynamic frame;
 
 - (id)initWithReuseIdentifier:(NSString *)anIdentifier {
-	
+
 	if (![super initWithFrame:CGRectZero])
 		return nil;
-	
+
 	identifier = [anIdentifier copy];
-	
+
 	return self;
 }
 
@@ -67,7 +67,7 @@
 #pragma mark -
 #pragma mark Private Methods
 
-- (DTGridView *)gridView {	
+- (DTGridView *)gridView {
 	UIResponder *r = [self nextResponder];
 	if (![r isKindOfClass:[DTGridView class]]) return nil;
 	return (DTGridView *)r;

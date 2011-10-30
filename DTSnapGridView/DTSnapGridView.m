@@ -22,15 +22,15 @@
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
-	
+
 	for (UIView *aView in self.subviews) {
-				
+
 		if ([aView isKindOfClass:[DTSnapGridViewCell class]]) {
-			
+
 			DTSnapGridViewCell *v = (DTSnapGridViewCell *)aView;
-			
+
 			v.slideAmount = (2*(v.center.x-self.contentOffset.x) + 2*v.frame.size.width - self.frame.size.width)/(self.frame.size.width - v.frame.size.width);
-			
+
 			if (v.slideAmount > 0.5 && v.slideAmount <= 1.5 && ![v isEqual:selectedCell]) {
 				selectedCell = v;
 			}

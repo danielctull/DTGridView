@@ -12,7 +12,7 @@
 @interface DTLabelsSnapGridViewCell : DTSnapGridViewCell {
 	UILabel *titleLabel, *subtitleLabel;
 	UIColor *selectedTextColor, *textColor;
-	
+
 }
 
 @property (nonatomic, retain) UILabel *titleLabel, *subtitleLabel;

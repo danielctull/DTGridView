@@ -13,7 +13,7 @@
 - (id)init {
 	if (![super init])
 		return nil;
-	
+
 	colours = [[NSArray alloc] initWithObjects:
 					[UIColor redColor],
 					[UIColor blueColor],
@@ -26,7 +26,7 @@
 					[UIColor purpleColor],
 					[UIColor orangeColor],
 					nil];
-	
+
 	return self;
 }
 
@@ -39,7 +39,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Scroll" style:UIBarButtonItemStyleBordered target:self action:@selector(scroll)] autorelease];	
+	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Scroll" style:UIBarButtonItemStyleBordered target:self action:@selector(scroll)] autorelease];
 	self.title = @"DTGridView";
 	self.gridView.delegate = self;
 	self.gridView.dataSource = self;
@@ -47,40 +47,40 @@
 }
 
 - (void)scroll {
-	
+
 	if (!pickerView)
 		pickerView = [[UIPickerView alloc] init];
-	
+
 	if (!navBar)
 		navBar = [[UINavigationBar alloc] initWithFrame:self.navigationController.navigationBar.frame];
-	
+
 //	navBar.title = @"Scroll GridView";
 
 	navBar.barStyle = UIBarStyleBlack;
 	UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"Scroll GridView"];
-	item.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Scroll To" style:UIBarButtonItemStylePlain target:self action:@selector(scrollTo)] autorelease];	
-	item.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(endScrolling)] autorelease];	
+	item.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Scroll To" style:UIBarButtonItemStylePlain target:self action:@selector(scrollTo)] autorelease];
+	item.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(endScrolling)] autorelease];
 	[navBar pushNavigationItem:item animated:NO];
 	[item release];
 	[self.navigationController.navigationBar.superview insertSubview:navBar belowSubview:self.navigationController.navigationBar];
-	
+
 	pickerView.dataSource = self;
 	pickerView.delegate = self;
 	[self.view addSubview:pickerView];
 	pickerView.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - pickerView.frame.size.height, pickerView.frame.size.width, pickerView.frame.size.height);
-	
+
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO];
-	
+
 	[UIView beginAnimations:@"pickerShow" context:nil];
 	self.gridView.contentInset = UIEdgeInsetsMake(pickerView.frame.size.height, 0, 0, 0);//(self.gridView.frame.origin.x, self.gridView.frame.origin.y + pickerView.frame.size.height, self.gridView.frame.size.width, self.gridView.frame.size.height - pickerView.frame.size.height);
 	self.gridView.scrollIndicatorInsets = UIEdgeInsetsMake(pickerView.frame.size.height, 0, 0, 0);
-	
+
 	//self.gridView.frame = CGRectMake(self.gridView.frame.origin.x, self.gridView.frame.origin.y + pickerView.frame.size.height, self.gridView.frame.size.width, self.gridView.frame.size.height - pickerView.frame.size.height);
 	self.navigationController.navigationBar.frame = CGRectMake(self.navigationController.navigationBar.frame.origin.x, self.navigationController.navigationBar.frame.origin.y - self.navigationController.navigationBar.frame.size.height, self.navigationController.navigationBar.frame.size.width, self.navigationController.navigationBar.frame.size.height);
 	pickerView.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, pickerView.frame.size.width, pickerView.frame.size.height);
-	
+
 	[UIView commitAnimations];
-	
+
 	//[self.gridView scrollViewToRow:1 column:1 scrollPosition:DTGridViewScrollPositionNone animated:YES];
 }
 
@@ -94,7 +94,7 @@
 	[UIView beginAnimations:@"pickerHide" context:nil];
 	self.gridView.contentInset = UIEdgeInsetsZero;
 	self.gridView.scrollIndicatorInsets = UIEdgeInsetsZero;
-	
+
 	self.navigationController.navigationBar.frame = CGRectMake(self.navigationController.navigationBar.frame.origin.x, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.navigationController.navigationBar.frame.size.width, self.navigationController.navigationBar.frame.size.height);
 	pickerView.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - pickerView.frame.size.height, pickerView.frame.size.width, pickerView.frame.size.height);
 	//self.gridView.frame = CGRectMake(self.gridView.frame.origin.x, self.gridView.frame.origin.y - pickerView.frame.size.height, self.gridView.frame.size.width, self.gridView.frame.size.height + pickerView.frame.size.height);
@@ -143,15 +143,15 @@
 }
 
 - (DTGridViewCell *)gridView:(DTGridView *)gv viewForRow:(NSInteger)rowIndex column:(NSInteger)columnIndex {
-	
+
 	DTGridViewCell *cell = [gv dequeueReusableCellWithIdentifier:@"cell"];
-		
+
 	if (!cell) {
 		cell = [[[DTGridViewCell alloc] initWithReuseIdentifier:@"cell"] autorelease];
 	}
-	
+
 	cell.backgroundColor = [colours objectAtIndex:(random() % 10)];
-	
+
 	return cell;
 }
 
@@ -160,7 +160,7 @@
 
 - (void)gridView:(DTGridView *)gv selectionMadeAtRow:(NSInteger)rowIndex column:(NSInteger)columnIndex {
 	NSLog(@"%@:%s %@", self, _cmd, [gv cellForRow:rowIndex column:columnIndex]);
-	
+
 }
 
 - (void)gridView:(DTGridView *)gridView scrolledToEdge:(DTGridViewEdge)edge {

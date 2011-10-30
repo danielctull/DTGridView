@@ -19,7 +19,7 @@
 	self.view.autoresizesSubviews = YES;
 	gridView = [[DTGridView alloc] initWithFrame:self.view.bounds];
 	self.gridView.autoresizingMask = self.view.autoresizingMask;
-	[self.view addSubview:self.gridView];	
+	[self.view addSubview:self.gridView];
 }
 
 - (void)viewDidUnload {

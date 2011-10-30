@@ -16,19 +16,19 @@
 @synthesize window;
 
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application {    
-	
+- (void)applicationDidFinishLaunching:(UIApplication *)application {
+
 	UITableViewController *vc = [[UITableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-	
+
 	navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
-	
+
 	vc.title = @"DTGridView";
 	vc.tableView.delegate = self;
 	vc.tableView.dataSource = self;
 	[vc release];
-	
+
 	[window addSubview:navigationController.view];
-	
+
     // Override point for customization after application launch
     [window makeKeyAndVisible];
 }
@@ -45,10 +45,10 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	
+
 	if (section == 0) return 1;
 	if (section == 1) return 3;
-	
+
 	return 0;
 }
 
@@ -60,16 +60,16 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	
+
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-	
+
 	if (!cell)
 		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:@"cell"] autorelease];
-	
+
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	
+
 	NSString *cellText = nil;
-	
+
 	if (indexPath.section == 0 && indexPath.row == 0)
 		cellText = @"Source License";
 	else if (indexPath.section == 1 && indexPath.row == 0)
@@ -78,14 +78,14 @@
 		cellText = @"DTInfiniteGridView";
 	else if (indexPath.section == 1 && indexPath.row == 2)
 		cellText = @"DTSnapGridView";
-	
+
 	cell.textLabel.text = cellText;
-	
+
 	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	
+
 	if (indexPath.section == 0 && indexPath.row == 0) {
 		DTLicenseAgreementViewController *vc = [[DTLicenseAgreementViewController alloc] init];
 		[navigationController pushViewController:vc animated:YES];

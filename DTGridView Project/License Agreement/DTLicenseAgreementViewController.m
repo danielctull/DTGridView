@@ -16,9 +16,9 @@
 - (id)init {
 	if (!(self = [self initWithNibName:@"DTLicenseAgreementView" bundle:nil]))
 		return nil;
-	
+
 	self.title = @"Source License";
-	
+
     return self;
 }
 

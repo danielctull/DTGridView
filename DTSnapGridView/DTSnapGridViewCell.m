@@ -20,7 +20,7 @@
 - (void)layoutSubviews {
 	CGFloat v = self.slideAmount;
 	CGFloat s = self.frame.size.width;
-	
+
 	for (UIView *view in self.subviews) {
 		CGFloat l = view.frame.size.width;
 		NSInteger x = (NSInteger)((((v * (s - l)) + l) / 2) - l/2);

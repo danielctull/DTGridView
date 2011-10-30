@@ -13,19 +13,19 @@
 
 /*!
  @class DTGridViewCell
- @abstract 
- @discussion 
+ @abstract
+ @discussion
 */
 @interface DTGridViewCell : UIView <DTGridViewCellInfoProtocol> {
 
 	NSUInteger xPosition, yPosition;
 	NSString *identifier;
-	
+
 	BOOL selected;
 	BOOL highlighted;
-	
+
 	id<DTGridViewCellDelegate> delegate;
-	
+
 }
 @property (nonatomic, assign) id delegate;
 @property (nonatomic, copy) NSString *identifier;
