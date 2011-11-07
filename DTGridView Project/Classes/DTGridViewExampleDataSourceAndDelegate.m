@@ -159,7 +159,7 @@
 #pragma mark DTGridViewDelegate methods
 
 - (void)gridView:(DTGridView *)gv selectionMadeAtRow:(NSInteger)rowIndex column:(NSInteger)columnIndex {
-	NSLog(@"%@:%s %@", self, _cmd, [gv cellForRow:rowIndex column:columnIndex]);
+	NSLog(@"%@:%@ %@", self, NSStringFromSelector(_cmd), [gv cellForRow:rowIndex column:columnIndex]);
 	
 }
 
