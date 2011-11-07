@@ -5,4 +5,5 @@
 *.mode2v3
 
 *.xcuserstate
+*xcuserdata
 *.xcbkptlist
