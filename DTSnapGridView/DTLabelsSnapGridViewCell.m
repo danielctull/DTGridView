@@ -57,12 +57,6 @@
 	[self layoutSubviews];
 }
 
-- (void)dealloc {
-	[titleLabel release];
-	[subtitleLabel release];
-	[super dealloc];
-}
-
 - (NSString *)description {
 	return [NSString stringWithFormat:@"<%@ title:%@ frame=(%i %i; %i %i)>", [self class], self.titleLabel.text, (NSInteger)self.frame.origin.x, (NSInteger)self.frame.origin.y, (NSInteger)self.frame.size.width, (NSInteger)self.frame.size.height];
 }

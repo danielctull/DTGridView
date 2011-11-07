@@ -23,11 +23,8 @@
 	
 	BOOL selected;
 	BOOL highlighted;
-	
-	id<DTGridViewCellDelegate> delegate;
-	
 }
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, unsafe_unretained) id delegate;
 @property (nonatomic, copy) NSString *identifier;
 @property (nonatomic, assign) BOOL selected;
 @property (nonatomic, assign) BOOL highlighted;

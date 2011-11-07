@@ -26,12 +26,6 @@
 	self.gridView = nil;
 }
 
-- (void)dealloc {
-	[gridView release];
-	gridView = nil;
-    [super dealloc];
-}
-
 - (NSInteger)numberOfRowsInGridView:(DTGridView *)gridView {
 	return 0;
 }

@@ -14,11 +14,6 @@
 @implementation DTSnapGridView
 
 @dynamic delegate;
-- (void)dealloc {
-	[decelerationTimer release];
-	decelerationTimer = nil;
-	[super dealloc];
-}
 
 - (void)layoutSubviews {
 	[super layoutSubviews];

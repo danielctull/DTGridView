@@ -23,6 +23,16 @@
 	return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+	if (!(self = [super initWithCoder:aDecoder])) return nil;
+	
+	numberOfColumns = [[NSMutableDictionary alloc] init];
+	self.showsHorizontalScrollIndicator = NO;
+	self.bounces = NO;
+	
+	return self;
+}
+
 - (NSInteger)realRowNumber:(NSInteger)row {
 	if (row >= fakeNumberOfRows)
 		return (row % fakeNumberOfRows);

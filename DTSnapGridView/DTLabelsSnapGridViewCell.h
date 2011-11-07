@@ -15,6 +15,6 @@
 	
 }
 
-@property (nonatomic, retain) UILabel *titleLabel, *subtitleLabel;
-@property (nonatomic, retain) UIColor *selectedTextColor, *textColor;
+@property (nonatomic, strong) UILabel *titleLabel, *subtitleLabel;
+@property (nonatomic, strong) UIColor *selectedTextColor, *textColor;
 @end
