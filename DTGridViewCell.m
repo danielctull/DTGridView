@@ -25,7 +25,7 @@
 
 - (id)initWithReuseIdentifier:(NSString *)anIdentifier {
 	
-	if (![super initWithFrame:CGRectZero])
+	if (![super initWithFrame:self.frame])
 		return nil;
 	
 	identifier = [anIdentifier copy];
