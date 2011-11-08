@@ -75,6 +75,13 @@ NSInteger intSort(id info1, id info2, void *context) {
 		return NSOrderedSame;
 }
 
+- (id)init {
+	if (!(self = [super init])) return nil;
+		
+	[self dctInternal_setupInternals];
+		
+	return self;
+}
 
 - (id)initWithFrame:(CGRect)frame {
 	
@@ -86,8 +93,14 @@ NSInteger intSort(id info1, id info2, void *context) {
 	
 }
 
-- (void)awakeFromNib {
+- (id)initWithCoder:(NSCoder *)aDecoder {
+	
+	if (!(self = [super initWithCoder:aDecoder])) return nil;
+	
 	[self dctInternal_setupInternals];
+	
+	return self;
+	
 }
 
 - (void)dctInternal_setupInternals {

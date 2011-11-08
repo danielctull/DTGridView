@@ -23,6 +23,7 @@
 }
 
 - (void)viewDidUnload {
+	[super viewDidUnload];
 	self.gridView = nil;
 }
 
