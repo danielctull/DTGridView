@@ -10,7 +10,7 @@
 #import "DTGridViewCellInfoProtocol.h"
 
 NSInteger const DTGridViewInvalid = -1;
-
+NSInteger intSort(id info1, id info2, void *context);
 
 @interface DTGridViewCellInfo : NSObject <DTGridViewCellInfoProtocol> {
 	NSUInteger xPosition, yPosition;
