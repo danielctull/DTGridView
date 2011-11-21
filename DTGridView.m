@@ -42,7 +42,7 @@ NSInteger intSort(id info1, id info2, void *context);
 - (void)decelerationTimer:(NSTimer *)timer;
 - (void)draggingTimer:(NSTimer *)timer;
 
-@property (nonatomic, strong) NSTimer *decelerationTimer, *draggingTimer;
+@property (nonatomic, retain) NSTimer *decelerationTimer, *draggingTimer;
 @end
 
 @implementation DTGridView
@@ -50,6 +50,18 @@ NSInteger intSort(id info1, id info2, void *context);
 @dynamic delegate;
 @synthesize dataSource, gridCells, numberOfRows, cellOffset, outset;
 @synthesize decelerationTimer, draggingTimer, layoutDirectionality;
+
+- (void)dealloc {
+	super.delegate = nil;
+	self.dataSource = nil;
+	[cellsOnScreen release], cellsOnScreen = nil;
+	[gridRows release], gridRows = nil;
+	[rowPositions release], rowPositions = nil;
+	[rowHeights release], rowHeights = nil;
+	[freeCells release], freeCells = nil;
+	[cellInfoForCellsOnScreen release], cellInfoForCellsOnScreen = nil;
+    [super dealloc];
+}
 
 - (void)setGridDelegate:(id <DTGridViewDelegate>)aDelegate {
 	self.delegate = aDelegate;
@@ -62,7 +74,7 @@ NSInteger intSort(id info1, id info2, void *context) {
 	
 	DTGridViewCellInfo *i1 = (DTGridViewCellInfo *)info1;
 	DTGridViewCellInfo *i2 = (DTGridViewCellInfo *)info2;
-
+	
     if (i1.yPosition < i2.yPosition)
         return NSOrderedAscending;
     else if (i1.yPosition > i2.yPosition)
@@ -77,16 +89,16 @@ NSInteger intSort(id info1, id info2, void *context) {
 
 - (id)init {
 	if (!(self = [super init])) return nil;
-		
+	
 	[self dctInternal_setupInternals];
-		
+	
 	return self;
 }
 
 - (id)initWithFrame:(CGRect)frame {
 	
 	if (!(self = [super initWithFrame:frame])) return nil;
-
+	
 	[self dctInternal_setupInternals];
 	
 	return self;
@@ -108,7 +120,7 @@ NSInteger intSort(id info1, id info2, void *context) {
 	columnIndexOfSelectedCell = DTGridViewInvalid;
 	rowIndexOfSelectedCell = DTGridViewInvalid;
     layoutDirectionality = DTGridViewDirectionalityDefault;
-
+	
 	gridRows = [[NSMutableArray alloc] init];
 	rowPositions = [[NSMutableArray alloc] init];
 	rowHeights = [[NSMutableArray alloc] init];
@@ -144,7 +156,7 @@ NSInteger intSort(id info1, id info2, void *context) {
 - (void)drawRect:(CGRect)rect {
 	
 	oldContentOffset = 	CGPointMake(0.0f, 0.0f);
-		
+	
 	//hasLoadedData = NO;
 	
 	//if (!hasLoadedData)
@@ -153,7 +165,7 @@ NSInteger intSort(id info1, id info2, void *context) {
 	
 	for (UIView *v in self.subviews)
         if ([v isKindOfClass:[DTGridViewCell class]])
-             [v removeFromSuperview];
+			[v removeFromSuperview];
 	
 	[self initialiseViews];
 	
@@ -224,7 +236,7 @@ NSInteger intSort(id info1, id info2, void *context) {
 	
 	[cellInfoForCellsOnScreen sortUsingFunction:intSort context:NULL];
 	
-	DTGridViewCell *cell = [self findViewForRow:info.yPosition column:info.xPosition];
+	DTGridViewCell *cell = [[self findViewForRow:info.yPosition column:info.xPosition] retain];
 	[cell setNeedsDisplay];
 	cell.xPosition = info.xPosition;
 	cell.yPosition = info.yPosition;
@@ -251,7 +263,9 @@ NSInteger intSort(id info1, id info2, void *context) {
 			break;
 		}
 	}
-
+	
+	[cell release];
+	
 }
 
 - (void)removeCellWithInfo:(DTGridViewCellInfo *)info {
@@ -268,6 +282,8 @@ NSInteger intSort(id info1, id info2, void *context) {
 	
 	if (![cell isKindOfClass:[DTGridViewCell class]]) return;
 	
+	[cell retain];
+	
 	[cell removeFromSuperview];
 	
 	[row replaceObjectAtIndex:info.xPosition withObject:info];
@@ -278,6 +294,8 @@ NSInteger intSort(id info1, id info2, void *context) {
 	//cell.frame = CGRectZero;
 	
 	[freeCells addObject:cell];
+	
+	[cell release];
 }
 
 - (CGRect)visibleRect {
@@ -458,15 +476,19 @@ NSInteger intSort(id info1, id info2, void *context) {
 			info.frame = CGRectMake(x,y,width,height);
 			
 			[cellInfoArrayCols addObject:info];
+			
+			[info release];
 		}
 		
 		[cellInfoArrayRows addObject:cellInfoArrayCols];
+		[cellInfoArrayCols release];
 	}
 	
 	
 	self.contentSize = CGSizeMake(maxWidth, maxHeight);
 	
 	self.gridCells = cellInfoArrayRows;
+	[cellInfoArrayRows release];
 	
 	if ([self.subviews count] > [self.gridCells count]) {
 		// the underlying data must have reduced, time to iterate
@@ -482,18 +504,20 @@ NSInteger intSort(id info1, id info2, void *context) {
 				[cell removeFromSuperview];
             }
 		}
+		
+		[subviewsCopy release];
 	}
 }
 
 - (void)checkViews {
-		
+	
 	if ([cellInfoForCellsOnScreen count] == 0) {
 		[self initialiseViews];
 		return;
 	}
 	
 	NSMutableDictionary *leftRightCells = [[NSMutableDictionary alloc] init];
-		
+	
 	NSArray *orderedCells = [cellInfoForCellsOnScreen copy];
 	
 	BOOL isGoingUp = NO;
@@ -515,7 +539,7 @@ NSInteger intSort(id info1, id info2, void *context) {
 	else if (hasResized)
 		isGoingRight = YES;
     
-  //  NSLog(@"isGoingUp: %i, isGoingDown: %i, co.y: %f, old.y: %f", isGoingUp, isGoingDown, self.contentOffset.y, oldContentOffset.y);
+	//  NSLog(@"isGoingUp: %i, isGoingDown: %i, co.y: %f, old.y: %f", isGoingUp, isGoingDown, self.contentOffset.y, oldContentOffset.y);
 	
 	hasResized = NO;
 	oldContentOffset = self.contentOffset;
@@ -555,11 +579,15 @@ NSInteger intSort(id info1, id info2, void *context) {
 			[self checkRow:info.yPosition column:info.xPosition goingLeft:NO];
 		}
 	}
-		
+	
 	if (isGoingUp)
 		[self checkNewRowStartingWithCellInfo:[orderedCells objectAtIndex:0] goingUp:YES];
 	else if (isGoingDown)
 		[self checkNewRowStartingWithCellInfo:[orderedCells lastObject] goingUp:NO];
+	
+	
+	[leftRightCells release];
+	[orderedCells release];
 }
 
 - (void)initialiseViews {
@@ -601,7 +629,7 @@ NSInteger intSort(id info1, id info2, void *context) {
 	
 	if ([self cellInfoShouldBeOnShow:info])
 		[self addCellWithInfo:info];
-		
+	
 	if (goingLeft) {
 		if (info.frame.origin.x > self.contentOffset.x)
 			[self checkRow:row column:(col - 1) goingLeft:goingLeft];
@@ -627,7 +655,7 @@ NSInteger intSort(id info1, id info2, void *context) {
     //NSLog(@"%@", info);
     
 	if (!info) return;
-		
+	
 	if (![self rowOfCellInfoShouldBeOnShow:info]) return;
 	
 	NSObject<DTGridViewCellInfoProtocol> *infoToCheck = info;
@@ -639,14 +667,14 @@ NSInteger intSort(id info1, id info2, void *context) {
 	BOOL goingLeft = NO;
 	
 	while (![self cellInfoShouldBeOnShow:infoToCheck]) {
-				
+		
 		goingLeft = !goingLeft;
-				
+		
 		if (goingLeft)
 			infoToCheck = [self cellInfoForRow:row column:--goingLeftPosition];
 		else
 			infoToCheck = [self cellInfoForRow:row column:++goingRightPosition];
-				
+		
 		if (goingRightPosition > total)
 			return;
 	}
@@ -657,14 +685,14 @@ NSInteger intSort(id info1, id info2, void *context) {
 	} else {
 		[self checkRow:infoToCheck.yPosition column:infoToCheck.xPosition goingLeft:goingLeft];
 	}
-
+	
 	NSObject<DTGridViewCellInfoProtocol> *nextInfo = nil;
 	
 	if (goingUp)
 		nextInfo = [self cellInfoForRow:info.yPosition - 1 column:info.xPosition];
 	else
 		nextInfo = [self cellInfoForRow:info.yPosition + 1 column:info.xPosition];
-		
+	
 	if (nextInfo)
 		[self checkNewRowStartingWithCellInfo:nextInfo goingUp:goingUp];
 }
@@ -675,10 +703,10 @@ NSInteger intSort(id info1, id info2, void *context) {
 	
 	for (DTGridViewCell *c in freeCells) {
 		if ([c.identifier isEqualToString:identifier]) {
-			DTGridViewCell *cellToReturn = c;
+			[c retain];
 			[freeCells removeObject:c];
-			[cellToReturn prepareForReuse];
-			return cellToReturn;
+			[c prepareForReuse];
+			return [c autorelease];
 		}
 	}
 	
@@ -723,7 +751,7 @@ NSInteger intSort(id info1, id info2, void *context) {
 			isBig = YES;
 		
 		if ((cellFrame.origin.x < self.contentOffset.x)
-		&& ((cellFrame.origin.x + cellFrame.size.width) > (self.contentOffset.x + self.frame.size.width)))
+			&& ((cellFrame.origin.x + cellFrame.size.width) > (self.contentOffset.x + self.frame.size.width)))
 			xPos = self.contentOffset.x;
 		
 		else if (cellFrame.origin.x < self.contentOffset.x)
@@ -759,7 +787,7 @@ NSInteger intSort(id info1, id info2, void *context) {
 			isBig = YES;
 		
 		if ((cellFrame.origin.y < self.contentOffset.y)
-		&& ((cellFrame.origin.y + cellFrame.size.height) > (self.contentOffset.y + self.frame.size.height)))
+			&& ((cellFrame.origin.y + cellFrame.size.height) > (self.contentOffset.y + self.frame.size.height)))
 			yPos = self.contentOffset.y;
 		
 		else if (cellFrame.origin.y < self.contentOffset.y)
@@ -796,7 +824,7 @@ NSInteger intSort(id info1, id info2, void *context) {
 	
 	if ([self.delegate respondsToSelector:@selector(gridView:didProgrammaticallyScrollToRow:column:)])
 		[self.delegate gridView:self didProgrammaticallyScrollToRow:rowIndex column:columnIndex];
-		
+	
 	
 }
 

@@ -13,7 +13,7 @@
 	DTGridView *gridView;
 }
 
-@property (nonatomic, strong) DTGridView *gridView;
+@property (nonatomic, retain) DTGridView *gridView;
 
 @end
 

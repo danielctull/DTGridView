@@ -23,7 +23,7 @@
  @constant DTGridViewScrollPositionBottomCenter Aligns the cell so that it is in the bottom center of the grid view.
  @constant DTGridViewScrollPositionBottomRight Aligns the cell so that it is in the bottom right of the grid view.
  @discussion In most cases you will want to use DTGridViewScrollPositionNone to just bring the cell to the screen using the quickest route. In the case where the cell is too big to display completely on screen, the position will still be used, in that the center aligned cells will have their middle in the center of the screen, with their edges outside the screen bounds equally as much.
-*/
+ */
 typedef enum {
 	DTGridViewScrollPositionNone = 0,
 	DTGridViewScrollPositionTopLeft,
@@ -46,7 +46,7 @@ typedef enum {
  @constant DTGridViewEdgeRight Sweet, carbonated, non-alcoholic beverages.
  @discussion Extended discussion goes here.
  Lorem ipsum....
-*/
+ */
 typedef enum {
 	DTGridViewEdgeTop,
 	DTGridViewEdgeBottom,
@@ -96,7 +96,7 @@ struct DTOutset {
 
 #pragma mark -
 
-@protocol DTGridViewDataSource <NSObject>
+@protocol DTGridViewDataSource
 /*!
  Asks the data source to return the number of rows in the grid view.
  The grid view object requesting this information.
@@ -126,8 +126,11 @@ struct DTOutset {
  @class DTGridView
  @abstract 
  @discussion 
-*/
+ */
 @interface DTGridView : UIScrollView <UIScrollViewDelegate, DTGridViewCellDelegate> {
+	
+	NSObject<DTGridViewDataSource> *dataSource;
+	
 	CGPoint cellOffset;
 	
 	UIEdgeInsets outset;
@@ -147,7 +150,7 @@ struct DTOutset {
 	BOOL hasResized;
 	
 	BOOL hasLoadedData;
-		
+	
 	NSInteger numberOfRows;
 	
 	NSUInteger rowIndexOfSelectedCell;
@@ -163,27 +166,27 @@ struct DTOutset {
 /*!
  @abstract The object that acts as the data source of the receiving grid view.
  @discussion The data source must adopt the DTGridViewDataSource protocol. The data source is not retained.
-*/
-@property (nonatomic, unsafe_unretained) IBOutlet NSObject<DTGridViewDataSource> *dataSource;
+ */
+@property (nonatomic, assign) IBOutlet NSObject<DTGridViewDataSource> *dataSource;
 
 /*!
  @abstract The object that acts as the delegate of the receiving grid view.
  @discussion The delegate must adopt the DTGridViewDelegate protocol. The delegate is not retained.
-*/
-@property (nonatomic, unsafe_unretained) IBOutlet id<DTGridViewDelegate> delegate;
+ */
+@property (nonatomic, assign) IBOutlet id<DTGridViewDelegate> delegate;
 /*!
  @abstract The object that acts as the delegate of the receiving grid view.
  @deprecated This property is depricated and you should now use the standard delegate property.
  */
-@property (nonatomic, unsafe_unretained) IBOutlet id<DTGridViewDelegate> gridDelegate;
+@property (nonatomic, assign) IBOutlet id<DTGridViewDelegate> gridDelegate;
 
 /*!
  @abstract The offset for each cell with respect to the cells above and to the right.
  @discussion The x and y values can be either positive or negative; Using negative will overlay the cells by that amount, the outcome of this can never be gauranteed what the ordering of cells will be though.
-*/
+ */
 @property (assign) CGPoint cellOffset;
 @property (assign) UIEdgeInsets outset;
-@property (nonatomic, strong) NSMutableArray *gridCells;
+@property (nonatomic, retain) NSMutableArray *gridCells;
 @property (nonatomic) NSInteger numberOfRows;
 @property (nonatomic, assign) DTGridViewDirectionality layoutDirectionality ;
 
@@ -210,7 +213,7 @@ struct DTOutset {
  @abstract Returns a reusable grid view cell object located by its identifier.
  @param identifier A string identifying the cell object to be reused.
  @discussion For performance reasons, grid views should always reuse their cells. This works like the table view's reuse policy.
-*/
+ */
 - (DTGridViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
 
 /*!
@@ -227,19 +230,19 @@ struct DTOutset {
  @param columnIndex The index of the column to scroll to.
  @param position The position the cell should be in once scrolled to.
  @param animated If this 
-*/
+ */
 - (void)scrollViewToRow:(NSUInteger)rowIndex column:(NSUInteger)columnIndex scrollPosition:(DTGridViewScrollPosition)position animated:(BOOL)animated;
 
 - (void)selectRow:(NSUInteger)rowIndex column:(NSUInteger)columnIndex scrollPosition:(DTGridViewScrollPosition)position animated:(BOOL)animated;
 
 /*!
  @abstract This method should be used by subclasses to know when the grid did appear on screen.
-*/
+ */
 - (void)didLoad;
 
 /*!
  @abstract Call this to reload the grid view's data.
-*/
+ */
 - (void)reloadData;
 
 @end

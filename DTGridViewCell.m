@@ -33,6 +33,11 @@
 	return self;
 }
 
+- (void)dealloc {
+	[identifier release];
+    [super dealloc];
+}
+
 - (void)awakeFromNib {
 	identifier = nil;
 }
