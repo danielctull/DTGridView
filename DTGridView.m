@@ -484,6 +484,8 @@ NSInteger intSort(id info1, id info2, void *context) {
 		[cellInfoArrayCols release];
 	}
 	
+	self.contentSize = CGSizeMake(maxWidth, maxHeight);
+	
 	// If we're going right to left,  we want to shift all the rows to the right
 	if (self.layoutDirectionality & DTGridViewDirectionalityRightToLeft) {
 		for (NSArray *cellInfoArrayCols in cellInfoArrayRows) {
@@ -508,9 +510,9 @@ NSInteger intSort(id info1, id info2, void *context) {
 				}
 			}
 		}
+		
+		self.contentOffset = CGPointMake(maxWidth - self.frame.size.width, 0.0);
 	}
-	
-	self.contentSize = CGSizeMake(maxWidth, maxHeight);
 	
 	self.gridCells = cellInfoArrayRows;
 	[cellInfoArrayRows release];
