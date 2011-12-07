@@ -484,6 +484,31 @@ NSInteger intSort(id info1, id info2, void *context) {
 		[cellInfoArrayCols release];
 	}
 	
+	// If we're going right to left,  we want to shift all the rows to the right
+	if (self.layoutDirectionality & DTGridViewDirectionalityRightToLeft) {
+		for (NSArray *cellInfoArrayCols in cellInfoArrayRows) {
+			DTGridViewCellInfo *rightMostCellInfo = (DTGridViewCellInfo *)[cellInfoArrayCols lastObject];
+			CGFloat rightMostX = rightMostCellInfo.frame.origin.x + rightMostCellInfo.frame.size.width;
+			if (rightMostX < maxWidth) {
+				// Shift every cell over to the right
+				for (NSUInteger col = 0; col < [cellInfoArrayCols count]; ++col) {
+					DTGridViewCellInfo *cellInfo = [cellInfoArrayCols objectAtIndex:col];
+					
+					// Let the first cell fill the gap
+					if (col == 0) {
+						CGRect cellInfoFrame = cellInfo.frame;
+						cellInfoFrame.origin.x = (maxWidth - rightMostX);
+						cellInfo.frame = cellInfoFrame;
+					} else {
+						DTGridViewCellInfo *previousCellRow = [cellInfoArrayCols objectAtIndex:col-1];
+						CGRect cellInfoFrame = cellInfo.frame;
+						cellInfoFrame.origin.x = previousCellRow.frame.origin.x + previousCellRow.frame.size.width;
+						cellInfo.frame = cellInfoFrame;
+					}
+				}
+			}
+		}
+	}
 	
 	self.contentSize = CGSizeMake(maxWidth, maxHeight);
 	
