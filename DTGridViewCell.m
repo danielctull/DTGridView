@@ -11,6 +11,9 @@
 
 #pragma mark Private Methods
 @interface DTGridViewCell ()
+
+@property (nonatomic, retain) NSArray *codedSubviews;
+
 - (DTGridView *)gridView;
 @end
 
@@ -21,7 +24,19 @@
 @synthesize xPosition, yPosition, identifier, delegate, selected;
 @synthesize highlighted;
 
+@synthesize codedSubviews = _codedSubviews;
+
 @dynamic frame;
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+	self = [super initWithCoder:aDecoder];
+	
+	if (self) {
+		self.codedSubviews = [self.subviews copy];
+	}
+	
+	return self;
+}
 
 - (id)initWithReuseIdentifier:(NSString *)anIdentifier {
 	
@@ -30,15 +45,21 @@
 	
 	identifier = [anIdentifier copy];
 	
+	for (UIView *codedSubview in self.codedSubviews) {
+		[self addSubview:codedSubview];
+	}
+	
 	return self;
 }
 
 - (void)dealloc {
 	[identifier release];
+	[_codedSubviews release];
     [super dealloc];
 }
 
 - (void)awakeFromNib {
+	[super awakeFromNib];
 	identifier = nil;
 }
 
