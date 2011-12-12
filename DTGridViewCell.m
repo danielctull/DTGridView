@@ -12,7 +12,7 @@
 #pragma mark Private Methods
 @interface DTGridViewCell ()
 
-@property (nonatomic, retain) NSArray *codedSubviews;
+@property (nonatomic, copy) NSArray *codedSubviews;
 
 - (DTGridView *)gridView;
 @end
@@ -32,21 +32,21 @@
 	self = [super initWithCoder:aDecoder];
 	
 	if (self) {
-		self.codedSubviews = [self.subviews copy];
+		self.codedSubviews = self.subviews;
 	}
 	
 	return self;
 }
 
 - (id)initWithReuseIdentifier:(NSString *)anIdentifier {
+	self = [super initWithFrame:self.frame];
 	
-	if (![super initWithFrame:self.frame])
-		return nil;
-	
-	identifier = [anIdentifier copy];
-	
-	for (UIView *codedSubview in self.codedSubviews) {
-		[self addSubview:codedSubview];
+	if (self) {
+		identifier = [anIdentifier copy];
+		
+		for (UIView *codedSubview in self.codedSubviews) {
+			[self addSubview:codedSubview];
+		}
 	}
 	
 	return self;
