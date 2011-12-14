@@ -183,6 +183,8 @@ struct DTOutset {
 - (NSInteger)findNumberOfColumnsForRow:(NSInteger)row;
 - (CGFloat)findHeightForRow:(NSInteger)row;
 - (DTGridViewCell *)findViewForRow:(NSInteger)row column:(NSInteger)column;
+- (NSInteger)findSpacingBetweenRows;
+- (NSInteger)findSpacingBetweenColumns;
 
 #pragma mark -
 #pragma mark Regular methods
