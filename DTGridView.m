@@ -898,8 +898,14 @@ NSInteger intSort(id info1, id info2, void *context) {
 	
 	[self bringSubviewToFront:cell];
 	
-	if ([self.delegate respondsToSelector:@selector(gridView:selectionMadeAtRow:column:)])
-		[self.delegate gridView:self selectionMadeAtRow:cell.yPosition column:cell.xPosition];
+	if ([self.delegate respondsToSelector:@selector(gridView:selectionMadeAtRow:column:)]) {
+		// Reverse the columns if we're going right to left.
+		NSUInteger columnIndex = cell.xPosition;
+		if (self.layoutDirectionality & DTGridViewDirectionalityRightToLeft) {
+			columnIndex = [self.dataSource numberOfColumnsInGridView:self forRowWithIndex:rowIndexOfSelectedCell] - columnIndex - 1;
+		}
+		[self.delegate gridView:self selectionMadeAtRow:cell.yPosition column:columnIndex];
+	}
 }
 
 
