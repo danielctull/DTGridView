@@ -199,7 +199,13 @@ NSInteger intSort(id info1, id info2, void *context) {
 	
 	if (![info isMemberOfClass:[DTGridViewCellInfo class]]) return;
 	
-	[cellInfoForCellsOnScreen addObject:info];
+	NSUInteger idx = [cellInfoForCellsOnScreen indexOfObjectPassingTest:^BOOL(DTGridViewCellInfo *i, NSUInteger idx, BOOL *stop) {
+		return info.xPosition == i.xPosition && info.yPosition == i.yPosition;
+  	}];
+  	if(idx == NSNotFound)
+    		[cellInfoForCellsOnScreen addObject:info];
+  	else
+    		[cellInfoForCellsOnScreen replaceObjectAtIndex:idx withObject:info];
 	
 	[cellInfoForCellsOnScreen sortUsingFunction:intSort context:NULL];
 	
