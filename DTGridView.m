@@ -443,10 +443,7 @@ NSInteger intSort(id info1, id info2, void *context) {
 
 - (void)checkViews {
 		
-	if ([cellInfoForCellsOnScreen count] == 0) {
-		[self initialiseViews];
-		return;
-	}
+    [self initialiseViews];
 	
 	NSMutableDictionary *leftRightCells = [[NSMutableDictionary alloc] init];
 		
