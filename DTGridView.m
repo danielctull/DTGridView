@@ -332,6 +332,24 @@ NSInteger intSort(id info1, id info2, void *context) {
 - (DTGridViewCell *)findViewForRow:(NSInteger)row column:(NSInteger)column {
 	return [self.dataSource gridView:self viewForRow:row column:column];
 }
+
+- (NSInteger)findSpacingBetweenRows {
+    if ([self.dataSource respondsToSelector:@selector(spacingBetweenRowsInGridView:)]) {
+        return [self.dataSource spacingBetweenRowsInGridView:self];
+    } else {
+        return 0;
+    }
+}
+
+- (NSInteger)findSpacingBetweenColumns {
+    if ([self.dataSource respondsToSelector:@selector(spacingBetweenColumnsInGridView:)]) {
+        return [self.dataSource spacingBetweenColumnsInGridView:self];
+    } else {
+        return 0;
+    }
+}
+
+
 #pragma mark -
 
 - (void)loadData {
@@ -346,6 +364,9 @@ NSInteger intSort(id info1, id info2, void *context) {
 	if (!self.numberOfRows)
 		return;
 	
+    cellOffset.x = [self findSpacingBetweenColumns];
+    cellOffset.y = [self findSpacingBetweenRows];
+    
 	[gridRows removeAllObjects];
 	[rowHeights removeAllObjects];
 	[rowPositions removeAllObjects];
