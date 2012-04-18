@@ -243,7 +243,7 @@ NSInteger intSort(id info1, id info2, void *context) {
 	
 	NSMutableArray *row = [gridCells objectAtIndex:info.yPosition];
 	
-	if (info.xPosition > [row count]) return;
+	if (info.xPosition >= [row count]) return;
 	
 	DTGridViewCell *cell = [row objectAtIndex:info.xPosition];
 	
