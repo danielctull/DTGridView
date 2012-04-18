@@ -23,6 +23,16 @@
 	return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+	if (!(self = [super initWithCoder:aDecoder])) return nil;
+	
+	numberOfColumns = [[NSMutableDictionary alloc] init];
+	self.showsHorizontalScrollIndicator = NO;
+	self.bounces = NO;
+	
+	return self;
+}
+
 - (NSInteger)realRowNumber:(NSInteger)row {
 	if (row >= fakeNumberOfRows)
 		return (row % fakeNumberOfRows);
@@ -89,6 +99,9 @@
 	return [self.dataSource gridView:self viewForRow:row column:column];
 }
 
+- (CGSize)realContentSize{
+    return CGSizeMake(self.contentSize.width/5, self.contentSize.height/5);
+}
 
 - (void)layoutSubviews {
 	
@@ -113,9 +126,9 @@
 		if (self.contentOffset.y < 2*segmentHeight)
 			newY = self.contentOffset.y + segmentHeight;
 		else if (self.contentOffset.y > 3*segmentHeight)
-			newY = self.contentOffset.y - segmentHeight;	
-	}
-	
+			newY = self.contentOffset.y - segmentHeight;
+    }
+    
 	self.contentOffset = CGPointMake(newX, newY);
 	
 	[super layoutSubviews];

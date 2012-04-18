@@ -23,7 +23,7 @@
  @constant DTGridViewScrollPositionBottomCenter Aligns the cell so that it is in the bottom center of the grid view.
  @constant DTGridViewScrollPositionBottomRight Aligns the cell so that it is in the bottom right of the grid view.
  @discussion In most cases you will want to use DTGridViewScrollPositionNone to just bring the cell to the screen using the quickest route. In the case where the cell is too big to display completely on screen, the position will still be used, in that the center aligned cells will have their middle in the center of the screen, with their edges outside the screen bounds equally as much.
-*/
+ */
 typedef enum {
 	DTGridViewScrollPositionNone = 0,
 	DTGridViewScrollPositionTopLeft,
@@ -46,13 +46,31 @@ typedef enum {
  @constant DTGridViewEdgeRight Sweet, carbonated, non-alcoholic beverages.
  @discussion Extended discussion goes here.
  Lorem ipsum....
-*/
+ */
 typedef enum {
 	DTGridViewEdgeTop,
 	DTGridViewEdgeBottom,
 	DTGridViewEdgeLeft,
 	DTGridViewEdgeRight
 } DTGridViewEdge;
+
+/*!
+ @enum APDirectionality
+ @abstract Used to determin the cells layout direction.
+ @constant DTGridViewDirectionalityLeftToRight Content is layed out from left to right.
+ @constant DTGridViewDirectionalityRightToLeft Content is layed out from right to left.
+ @constant DTGridViewDirectionalityTopToBottom Content is layed out from top to bottom.
+ @constant DTGridViewDirectionalityBottomToTop Content is layed out from bottom to top.
+ @constant DTGridViewDirectionalityDefault By default layout is left to right and from top to bottom
+ @discussion Extended discussion goes here.
+ */
+typedef enum{
+    DTGridViewDirectionalityLeftToRight     = 1 << 0,    /**<  */
+    DTGridViewDirectionalityRightToLeft     = 1 << 1,    /**<  */
+    DTGridViewDirectionalityTopToBottom     = 1 << 2,    /**<  */
+    DTGridViewDirectionalityBottomToTop     = 1 << 3,    /**<  */
+    DTGridViewDirectionalityDefault         = (DTGridViewDirectionalityLeftToRight | DTGridViewDirectionalityTopToBottom),
+}DTGridViewDirectionality;
 
 struct DTOutset {
 	CGFloat top;
@@ -108,7 +126,7 @@ struct DTOutset {
  @class DTGridView
  @abstract 
  @discussion 
-*/
+ */
 @interface DTGridView : UIScrollView <UIScrollViewDelegate, DTGridViewCellDelegate> {
 	
 	NSObject<DTGridViewDataSource> *dataSource;
@@ -132,7 +150,7 @@ struct DTOutset {
 	BOOL hasResized;
 	
 	BOOL hasLoadedData;
-		
+	
 	NSInteger numberOfRows;
 	
 	NSUInteger rowIndexOfSelectedCell;
@@ -140,18 +158,21 @@ struct DTOutset {
 	
 	NSTimer *decelerationTimer;
 	NSTimer *draggingTimer;
+    
+    DTGridViewDirectionality layoutDirectionality;
+    dispatch_once_t driftOnceToken; //Helps to make sure we drift the content only once
 }
 
 /*!
  @abstract The object that acts as the data source of the receiving grid view.
  @discussion The data source must adopt the DTGridViewDataSource protocol. The data source is not retained.
-*/
+ */
 @property (nonatomic, assign) IBOutlet NSObject<DTGridViewDataSource> *dataSource;
 
 /*!
  @abstract The object that acts as the delegate of the receiving grid view.
  @discussion The delegate must adopt the DTGridViewDelegate protocol. The delegate is not retained.
-*/
+ */
 @property (nonatomic, assign) IBOutlet id<DTGridViewDelegate> delegate;
 /*!
  @abstract The object that acts as the delegate of the receiving grid view.
@@ -162,11 +183,12 @@ struct DTOutset {
 /*!
  @abstract The offset for each cell with respect to the cells above and to the right.
  @discussion The x and y values can be either positive or negative; Using negative will overlay the cells by that amount, the outcome of this can never be gauranteed what the ordering of cells will be though.
-*/
+ */
 @property (assign) CGPoint cellOffset;
 @property (assign) UIEdgeInsets outset;
 @property (nonatomic, retain) NSMutableArray *gridCells;
 @property (nonatomic) NSInteger numberOfRows;
+@property (nonatomic, assign) DTGridViewDirectionality layoutDirectionality ;
 
 #pragma mark -
 #pragma mark Subclass methods
@@ -183,6 +205,7 @@ struct DTOutset {
 - (NSInteger)findNumberOfColumnsForRow:(NSInteger)row;
 - (CGFloat)findHeightForRow:(NSInteger)row;
 - (DTGridViewCell *)findViewForRow:(NSInteger)row column:(NSInteger)column;
+- (CGSize)realContentSize;
 
 #pragma mark -
 #pragma mark Regular methods
@@ -190,7 +213,7 @@ struct DTOutset {
  @abstract Returns a reusable grid view cell object located by its identifier.
  @param identifier A string identifying the cell object to be reused.
  @discussion For performance reasons, grid views should always reuse their cells. This works like the table view's reuse policy.
-*/
+ */
 - (DTGridViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
 
 /*!
@@ -207,19 +230,19 @@ struct DTOutset {
  @param columnIndex The index of the column to scroll to.
  @param position The position the cell should be in once scrolled to.
  @param animated If this 
-*/
+ */
 - (void)scrollViewToRow:(NSUInteger)rowIndex column:(NSUInteger)columnIndex scrollPosition:(DTGridViewScrollPosition)position animated:(BOOL)animated;
 
 - (void)selectRow:(NSUInteger)rowIndex column:(NSUInteger)columnIndex scrollPosition:(DTGridViewScrollPosition)position animated:(BOOL)animated;
 
 /*!
  @abstract This method should be used by subclasses to know when the grid did appear on screen.
-*/
+ */
 - (void)didLoad;
 
 /*!
  @abstract Call this to reload the grid view's data.
-*/
+ */
 - (void)reloadData;
 
 @end

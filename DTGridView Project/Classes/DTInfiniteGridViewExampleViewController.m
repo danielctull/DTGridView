@@ -23,6 +23,8 @@
 	gridView.infiniteHorizontalScrolling = YES;
 	gridView.delegate = self;
 	gridView.pagingEnabled = NO;
+    gridView.layoutDirectionality = (DTGridViewDirectionalityRightToLeft | DTGridViewDirectionalityTopToBottom);
+    
 	[self.view addSubview:gridView];
 }
 
@@ -73,8 +75,25 @@
 - (DTGridViewCell *)gridView:(DTGridView *)gv viewForRow:(NSInteger)rowIndex column:(NSInteger)columnIndex {
 	DTGridViewCell *view = [[gv dequeueReusableCellWithIdentifier:@"cell"] retain];
 	
-	if (!view)
+    UILabel *indexesLabel = nil;
+    
+	if (!view){
 		view = [[DTGridViewCell alloc] initWithReuseIdentifier:@"cell"];
+        indexesLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0.0, 
+                                                                  0.0,
+                                                                  gv.frame.size.width / 2,
+                                                                  gv.frame.size.height)] autorelease];
+        indexesLabel.backgroundColor = [UIColor clearColor];
+        indexesLabel.textAlignment = UITextAlignmentCenter;
+        [view addSubview:indexesLabel];
+    }
+    else{
+        indexesLabel = [[view subviews] lastObject];
+    }
+    
+    indexesLabel.text = [NSString stringWithFormat:@"[R:%d|C:%d]",
+                         rowIndex,
+                         columnIndex];
 	
 	if (columnIndex == 0)
 		view.backgroundColor = [UIColor redColor];
