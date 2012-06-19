@@ -23,6 +23,13 @@
 	return self;
 }
 
+- (void) awakeFromNib {
+    
+    numberOfColumns = [[NSMutableDictionary alloc] init];
+	self.showsHorizontalScrollIndicator = NO;
+	self.bounces = NO;
+}
+
 - (NSInteger)realRowNumber:(NSInteger)row {
 	if (row >= fakeNumberOfRows)
 		return (row % fakeNumberOfRows);
