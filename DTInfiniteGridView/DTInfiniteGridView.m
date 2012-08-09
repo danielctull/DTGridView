@@ -13,14 +13,31 @@
 
 @synthesize infiniteVerticalScrolling, infiniteHorizontalScrolling;
 
+- (void) setup
+{
+    numberOfColumns = [[NSMutableDictionary alloc] init];
+	self.showsHorizontalScrollIndicator = NO;
+	self.bounces = NO;
+}
+
 - (id)initWithFrame:(CGRect)frame {
 	
 	if (!(self = [super initWithFrame:frame])) return nil;
 	
-	numberOfColumns = [[NSMutableDictionary alloc] init];
-	self.showsHorizontalScrollIndicator = NO;
-	self.bounces = NO;
+	[self setup];
+    
 	return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    
+    if (self) {
+        [self setup];
+    }
+    
+    return self;
 }
 
 - (NSInteger)realRowNumber:(NSInteger)row {
