@@ -14,11 +14,14 @@
 @implementation DTSnapGridView
 
 @dynamic delegate;
+#if __has_feature(objc_arc)
+#else
 - (void)dealloc {
 	[decelerationTimer release];
 	decelerationTimer = nil;
 	[super dealloc];
 }
+#endif
 
 - (void)layoutSubviews {
 	[super layoutSubviews];

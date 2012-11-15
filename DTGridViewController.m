@@ -26,11 +26,14 @@
 	self.gridView = nil;
 }
 
+#if __has_feature(objc_arc)
+#else
 - (void)dealloc {
 	[gridView release];
 	gridView = nil;
     [super dealloc];
 }
+#endif
 
 - (NSInteger)numberOfRowsInGridView:(DTGridView *)gridView {
 	return 0;
