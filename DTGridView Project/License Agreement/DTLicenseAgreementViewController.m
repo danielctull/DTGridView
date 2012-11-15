@@ -49,11 +49,12 @@
     // Release anything that's not essential, such as cached data
 }
 
-
+#if __has_feature(objc_arc)
+#else
 - (void)dealloc {
 	[webView release]; webView = nil;
     [super dealloc];
 }
-
+#endif
 
 @end

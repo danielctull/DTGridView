@@ -54,10 +54,12 @@
 	// e.g. self.myOutlet = nil;
 }
 
-
+#if __has_feature(objc_arc)
+#else
 - (void)dealloc {
     [super dealloc];
 }
+#endif
 - (NSInteger)numberOfRowsInGridView:(DTGridView *)gridView {
 	return 1;
 }
@@ -71,8 +73,11 @@
 	return gv.frame.size.width / 2;
 }
 - (DTGridViewCell *)gridView:(DTGridView *)gv viewForRow:(NSInteger)rowIndex column:(NSInteger)columnIndex {
+#if __has_feature(objc_arc)
+    DTGridViewCell *view = [gv dequeueReusableCellWithIdentifier:@"cell"];
+#else
 	DTGridViewCell *view = [[gv dequeueReusableCellWithIdentifier:@"cell"] retain];
-	
+#endif
 	if (!view)
 		view = [[DTGridViewCell alloc] initWithReuseIdentifier:@"cell"];
 	
@@ -86,8 +91,11 @@
 		view.backgroundColor = [UIColor yellowColor];
 	else
 		NSLog(@"%@:%@ FAIL: %i", self, NSStringFromSelector(_cmd), columnIndex);
-	
+#if __has_feature(objc_arc)
+    return view;
+#else
 	return [view autorelease];
+#endif
 }
 
 @end

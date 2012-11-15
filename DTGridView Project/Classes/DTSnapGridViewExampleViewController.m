@@ -35,10 +35,12 @@
 	// e.g. self.myOutlet = nil;
 }
 
-
+#if __has_feature(objc_arc)
+#else
 - (void)dealloc {
     [super dealloc];
 }
+#endif
 
 #pragma mark DTGridViewDataSource Methods
 
