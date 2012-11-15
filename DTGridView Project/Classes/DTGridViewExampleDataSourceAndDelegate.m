@@ -30,16 +30,23 @@
 	return self;
 }
 
+#if __has_feature(objc_arc)
+#else
 - (void)dealloc {
 	[pickerView release];
 	[navBar release];
 	[colours release];
 	[super dealloc];
 }
+#endif
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Scroll" style:UIBarButtonItemStyleBordered target:self action:@selector(scroll)] autorelease];	
+#if __has_feature(objc_arc)
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Scroll" style:UIBarButtonItemStyleBordered target:self action:@selector(scroll)];
+#else
+	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Scroll" style:UIBarButtonItemStyleBordered target:self action:@selector(scroll)] autorelease];
+#endif
 	self.title = @"DTGridView";
 	self.gridView.delegate = self;
 	self.gridView.dataSource = self;
@@ -58,10 +65,18 @@
 
 	navBar.barStyle = UIBarStyleBlack;
 	UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"Scroll GridView"];
-	item.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Scroll To" style:UIBarButtonItemStylePlain target:self action:@selector(scrollTo)] autorelease];	
-	item.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(endScrolling)] autorelease];	
+#if __has_feature(objc_arc)    
+	item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Scroll To" style:UIBarButtonItemStylePlain target:self action:@selector(scrollTo)];
+	item.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(endScrolling)];
+#else
+    item.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Scroll To" style:UIBarButtonItemStylePlain target:self action:@selector(scrollTo)] autorelease];
+	item.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(endScrolling)] autorelease];
+#endif
 	[navBar pushNavigationItem:item animated:NO];
+#if __has_feature(objc_arc)
+#else
 	[item release];
+#endif
 	[self.navigationController.navigationBar.superview insertSubview:navBar belowSubview:self.navigationController.navigationBar];
 	
 	pickerView.dataSource = self;
@@ -147,7 +162,11 @@
 	DTGridViewCell *cell = [gv dequeueReusableCellWithIdentifier:@"cell"];
 		
 	if (!cell) {
+#if __has_feature(objc_arc)
+        cell = [[DTGridViewCell alloc] initWithReuseIdentifier:@"cell"];
+#else
 		cell = [[[DTGridViewCell alloc] initWithReuseIdentifier:@"cell"] autorelease];
+#endif
 	}
 	
 	cell.backgroundColor = [colours objectAtIndex:(random() % 10)];

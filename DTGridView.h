@@ -146,7 +146,11 @@ struct DTOutset {
  @abstract The object that acts as the data source of the receiving grid view.
  @discussion The data source must adopt the DTGridViewDataSource protocol. The data source is not retained.
 */
+#if __has_feature(objc_arc)
+@property (nonatomic, retain) IBOutlet NSObject<DTGridViewDataSource> *dataSource;
+#else
 @property (nonatomic, assign) IBOutlet NSObject<DTGridViewDataSource> *dataSource;
+#endif
 
 /*!
  @abstract The object that acts as the delegate of the receiving grid view.

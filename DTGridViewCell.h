@@ -27,7 +27,11 @@
 	id<DTGridViewCellDelegate> delegate;
 	
 }
+#if __has_feature(objc_arc)
+@property (nonatomic, retain) id delegate;
+#else
 @property (nonatomic, assign) id delegate;
+#endif
 @property (nonatomic, copy) NSString *identifier;
 @property (nonatomic, assign) BOOL selected;
 @property (nonatomic, assign) BOOL highlighted;

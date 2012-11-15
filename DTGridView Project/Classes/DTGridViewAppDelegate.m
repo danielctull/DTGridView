@@ -25,20 +25,24 @@
 	vc.title = @"DTGridView";
 	vc.tableView.delegate = self;
 	vc.tableView.dataSource = self;
+#if __has_feature(objc_arc)
+#else
 	[vc release];
-	
+#endif
 	[window addSubview:navigationController.view];
 	
     // Override point for customization after application launch
     [window makeKeyAndVisible];
 }
 
-
+#if __has_feature(objc_arc)
+#else
 - (void)dealloc {
 	[navigationController release];
     [window release];
     [super dealloc];
 }
+#endif
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 3;
@@ -64,8 +68,11 @@
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
 	
 	if (!cell)
+#if __has_feature(objc_arc)
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+#else
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"] autorelease];
-	
+#endif
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	
 	NSString *cellText = nil;
@@ -89,19 +96,31 @@
 	if (indexPath.section == 0 && indexPath.row == 0) {
 		DTLicenseAgreementViewController *vc = [[DTLicenseAgreementViewController alloc] init];
 		[navigationController pushViewController:vc animated:YES];
+#if __has_feature(objc_arc)
+#else
 		[vc release];
+#endif
 	} else if (indexPath.section == 1 && indexPath.row == 0) {
 		DTGridViewExampleDataSourceAndDelegate *vc = [[DTGridViewExampleDataSourceAndDelegate alloc] init];
 		[navigationController pushViewController:vc animated:YES];
+#if __has_feature(objc_arc)
+#else
 		[vc release];
+#endif
 	} else if (indexPath.section == 1 && indexPath.row == 1) {
 		DTInfiniteGridViewExampleViewController *vc = [[DTInfiniteGridViewExampleViewController alloc] init];
 		[navigationController pushViewController:vc animated:YES];
+#if __has_feature(objc_arc)
+#else
 		[vc release];
+#endif
 	} else if (indexPath.section == 1 && indexPath.row == 2) {
 		DTSnapGridViewExampleViewController *vc = [[DTSnapGridViewExampleViewController alloc] init];
 		[navigationController pushViewController:vc animated:YES];
+#if __has_feature(objc_arc)
+#else
 		[vc release];
+#endif
 	}
 }
 

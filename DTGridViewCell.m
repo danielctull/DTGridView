@@ -33,10 +33,13 @@
 	return self;
 }
 
+#if __has_feature(objc_arc)
+#else
 - (void)dealloc {
 	[identifier release];
     [super dealloc];
 }
+#endif
 
 - (void)awakeFromNib {
 	identifier = nil;
